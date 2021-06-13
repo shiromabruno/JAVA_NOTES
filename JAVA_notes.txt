@@ -76,6 +76,9 @@ variable = (condition) ? expressionTrue :  expressionFalse;
 int time = 20;
 String result = (time < 18) ? "Good day." : "Good evening.";
 
+name = city.getName();
+if (name == null) name = "N/A";
+
 -------------------------------------------------------------------------------------------------------------------
 Difference map and hashmap
 HashMap<String, Object> map = new HashMap<String, Object>();  --> will allow the use of any public functions in HashMap (which includes the Map interface).
@@ -91,44 +94,205 @@ ArrayList<String> al = new ArrayList<String>();
 
 List interface is implemented by the classes of ArrayList, LinkedList, Vector and Stack.
 
+List
+List is an Interface.
+List interface extends the Collection framework.
+List cannot be instantiated.
+List interface is used to create a list of elements(objects) which are associated with their index numbers.
+List interface creates a collection of elements that are stored in a sequence and they are identified and accessed using the index.
+
+ArrayList
+ArrayList is a Class.
+ArrayList extends AbstractList class and implements List interface.
+ArrayList can be instantiated.
+ArrayList class is used to create a dynamic array that contains objects.
+ArrayList creates an array of objects where the array can grow dynamically.
+
 -------------------------------------------------------------------------------------------------------------------
 
 Lambda
 
--------------------------------------------------------------------------------------------------------------------
+Lambda expressions are similar to methods, but they do not need a name and they can be implemented right in the body of a method.
+A lambda expression is a short block of code which takes in parameters and returns a value.
 
+parameter -> expression
+(parameter1, parameter2) -> expression
+(parameter1, parameter2) -> { code block }
 
-O método trim() só tira espaço do inicio e fim da String. 
+ArrayList<Integer> numbers = new ArrayList<Integer>();
+    numbers.add(5);
+    numbers.add(9);
+    numbers.add(8);
+    numbers.add(1);
+    numbers.forEach( (n) -> { System.out.println(n); } );
+    numbers.forEach(  n  -> { if (n%2 == 0) System.out.println(n); });
 
-Exemplo: 
-String temp = " java ".trim();   
-System.out.println(temp);   
-
-
-Para tirar do meio da String vc pode usar o replace 
-String temp = "ja va";   
-System.out.print(temp.replace(" ", ""));  
-
-public static boolean isNumeric(String s){  // testa se o campo eh numerico
-    try{
-        Long.parseLong(s);
-        return true;
+**** Java program to demonstrate working of lambda expressions
+public class Test
+{
+****    // operation is implemented using lambda expressions
+    interface FuncInter1
+    {
+        int operation(int a, int b);
     }
-    catch(NumberFormatException ex){
-        return false;
+  
+****    // sayMessage() is implemented using lambda expressions
+****    // above
+    interface FuncInter2
+    {
+        void sayMessage(String message);
+    }
+  
+****    // Performs FuncInter1's operation on 'a' and 'b'
+    private int operate(int a, int b, FuncInter1 fobj)
+    {
+        return fobj.operation(a, b);
+    }
+  
+    public static void main(String args[])
+    {
+****        // lambda expression for addition for two parameters
+****        // data type for x and y is optional.
+****        // This expression implements 'FuncInter1' interface
+        FuncInter1 add = (int x, int y) -> x + y;
+  
+****        // lambda expression multiplication for two parameters
+****        // This expression also implements 'FuncInter1' interface
+        FuncInter1 multiply = (int x, int y) -> x * y;
+  
+****        // Creating an object of Test to call operate using
+****        // different implementations using lambda Expressions
+        Test tobj = new Test();
+  
+****        // Add two numbers using lambda expression
+        System.out.println("Addition is " +
+                          tobj.operate(6, 3, add));
+  
+****        // Multiply two numbers using lambda expression
+        System.out.println("Multiplication is " +
+                          tobj.operate(6, 3, multiply));
+  
+****        // lambda expression for single parameter
+****        // This expression implements 'FuncInter2' interface
+        FuncInter2 fobj = message ->System.out.println("Hello "
+                                                 + message);
+        fobj.sayMessage("Geek");
     }
 }
 
+-------------------------------------------------------------------------------------------------------------------
 
-if(jTextField1.getText().trim().equals("")) {
-           JOptionPane.showMessageDialog(null, "Preecha o Campo");
-           return;
-        }
+Generics
 
-____
+-------------------------------------------------------------------------------------------------------------------
 
-int i = Integer.parseInt(String x);
-double y = Double.parseDouble(String x);
+Herança heranca inherits inheritance
+
+Extend - Classe Pai Mãe Mae
+
+Extends: In Java, the extends keyword is used to indicate that the class which is being defined is derived from the base class using inheritance. So basically, extends keyword is used to extend the functionality of the parent class to the subclass.
+In Java, multiple inheritances are not allowed due to ambiguity. Therefore, a class can extend only one class to avoid ambiguity.
+
+class One {
+    public void methodOne()
+    {
+  
+        // Some Functionality
+    }
+}
+  
+class Two extends One {
+  
+    public static void main(String args[])
+    {
+        Two t = new Two();
+  
+        // Calls the method one
+        // of the above class
+        t.methodOne();
+    }
+}
+
+Usando metodo SUPER.
+Chama Construtor da Classe PAI.
+
+Exemplo Classe 
+
+public class Pessoa {
+
+public Pessoa(String nome,String cpf) {
+this.setNome(nome);
+this.setCPF(cpf);
+}
+
+//gets and sets
+}
+
+public class Funcionario extends Pessoa{
+	public String cargo;
+	public Funcionario(String nome, String cpf) {
+		super(nome, cpf);
+		setCargo(cargo);
+	}
+	public String getCargo() {
+		return cargo;
+	}
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+}
+
+-------------------------------------------------------------------------------------------------------------------
+
+Herança heranca inherits inheritance
+
+Interface
+
+Implements: In Java, the implements keyword is used to implement an interface. An interface is a special type of class which implements a complete abstraction and only contains abstract methods. To access the interface methods, the interface must be “implemented” by another class with the implements keyword and the methods need to be implemented in the class which is inheriting the properties of the interface. Since an interface is not having the implementation of the methods, a class can implement any number of interfaces at a time.
+
+// Defining an interface
+interface One {
+    public void methodOne();
+}
+  
+// Defining the second interface
+interface Two {
+    public void methodTwo();
+}
+  
+// Implementing the two interfaces
+class Three implements One, Two {
+    public void methodOne()
+    {
+  
+        // Implementation of the method
+    }
+  
+    public void methodTwo()
+    {
+  
+        // Implementation of the method
+    }
+}
+
+Note: An interface can extend any number of interfaces at a time.
+
+// Defining the interface One
+interface One {
+    void methodOne();
+}
+  
+// Defining the interface Two
+interface Two {
+    void methodTwo();
+}
+  
+// Interface extending both the
+// defined interfaces
+interface Three extends One, Two {
+}
+
 
 
 -------------------------------------------------------------------------------------------------------------------
@@ -172,5 +336,280 @@ for (String key : example.keySet()) {
     System.out.println(key + " = " + value);
 }
 
+-------------------------------------------------------------------------------------------------------------------
+
+O método trim() só tira espaço do inicio e fim da String. 
+
+Exemplo: 
+String temp = " java ".trim();   
+System.out.println(temp);   
 
 
+Para tirar do meio da String vc pode usar o replace 
+String temp = "ja va";   
+System.out.print(temp.replace(" ", ""));  
+
+public static boolean isNumeric(String s){  // testa se o campo eh numerico
+    try{
+        Long.parseLong(s);
+        return true;
+    }
+    catch(NumberFormatException ex){
+        return false;
+    }
+}
+
+
+if(jTextField1.getText().trim().equals("")) {
+           JOptionPane.showMessageDialog(null, "Preecha o Campo");
+           return;
+        }
+
+-------------------------------------------------------------------------------------------------------------------
+
+Conversao Conversão
+Cast
+
+Widening Casting (automatically) - converting a smaller type to a larger type size
+byte -> short -> char -> int -> long -> float -> double
+
+Narrowing Casting (manually) - converting a larger type to a smaller size type
+double -> float -> long -> int -> char -> short -> byte
+
+Double para Integer
+double myDouble = 9.78;
+int myInt = (int) myDouble; 
+
+1) Convertendo ASCII para String
+int i = 64;
+String aChar = new Character((char)i).toString();
+
+2) Convertendo números em decimal para binário
+int i = 42;
+String binstr = Integer.toBinaryString(i);
+
+3) Convertendo um valor booleano para integer
+i = (b)?1:0;
+
+4) Convertendo um número decimal para hexadecimal
+int i = 42;
+String hexstr = Integer.toString(i, 16);
+
+5) Convertendo um Double para um String
+double i = 42.0;
+String str = Double.toString(i);
+
+6) Convertendo um float para um StringConversion from float to String
+float f = 12.0f;
+String str = Float.toString(f);
+
+7) Convertendo números em hexadecimal para integer
+nt i = Integer.valueOf("B8DA3", 16).intValue();
+
+8) Convertendo um integer para código ASCII
+char c = 'A';
+int i = (int) c; // Você terá o valor 65
+
+9) Convertendo um número integer para boolean
+b = (i != 0);
+
+10) Convertendo de um integer para uma String
+int i = 42;
+String str = Integer.toString(i);
+
+11) Convertendo de um long para uma String
+long l = 42;
+String str = Long.toString(l);
+
+12) Convertendo de uma String para Double
+double d = Double.valueOf(str).doubleValue();
+
+13) Convertendo String para integer
+str = "25";
+int i = Integer.valueOf(str).intValue();
+
+14) Convertendo uma String para um float
+float f = Float.valueOf(str).floatValue();
+
+15) Convertendo uma String para um long
+long l = Long.valueOf(str).longValue();
+
+Classes Pai e Filho Mae e Filha
+Animal ---> CAT
+Animal animal = new Cat();
+((Cat) animal).meow();
+
+-------------------------------------------------------------------------------------------------------------------
+
+Types tipos of Keywords in Java Tipos de Keywords
+
+Static, Final, Abstract, Concrete, Singleton, POJO, Inner
+
+Static class
+The class has only static members.
+It cannot access the member (non-static) of the outer class.
+We cannot create an object of the static class.
+
+Static Method
+Static methods are the methods in Java that can be called without creating an object of class. They are referenced by the class name itself or reference to the Object of that class. 
+
+Static Variable
+The static variable can be used to refer to the common property of all objects (which is not unique for each object), for example, the company name of employees, college name of students, etc.
+The static variable gets memory only once in the class area at the time of class loading.
+class Student{  
+     int rollno;  
+     String name;  
+     String college="ITS";  
+}  
+Suppose there are 500 students in my college, now all instance data members will get memory each time when the object is created. All students have its unique rollno and name, so instance data member is good in such case. Here, "college" refers to the common property of all objects. If we make it static, this field will get the memory only once.
+
+-----
+
+Final class
+The purpose of the final class is to make the class immutable like the String class. It is only a way to make the class immutable. Remember that the final class cannot be extended. It also prevents the class from being sub-classed.
+
+Final method
+Methods marked as final cannot be overridden. When we design a class and feel that a method shouldn’t be overridden, we can make this method final.
+Classe pai Dog tem void sound(). Se classe filha PastorAlemao tiver void sound() na calasse, da ruim. 
+
+Final variable
+Variables marked as final can't be reassigned. Once a final variable is initialized, it can’t be altered.
+final int = 1. Nao pode ter depois na classe i = 2.
+
+-----
+
+Abstract Class
+The class may or may not contain abstract methods. We cannot create an instance of an abstract class but it can be a subclass. These classes are incomplete, so to complete the abstract class we should extend the abstract classes to a concrete class. When we declare a subclass as abstract then it is necessary to provide the implementation of abstract methods. Therefore, the subclass must also be declared abstract. We can achieve data hiding by using the abstract class.
+
+Abstract class x Interface Class
+Abstract class
+1) Abstract class can have abstract and non-abstract methods.
+2) Abstract class doesn't support multiple inheritance.
+3) Abstract class can have final, non-final, static and non-static variables.
+4) Abstract class can provide the implementation of interface.
+5) The abstract keyword is used to declare abstract class.
+6) An abstract class can extend another Java class and implement multiple Java interfaces.
+7) An abstract class can be extended using keyword "extends".
+8) A Java abstract class can have class members like private, protected, etc.
+9)Example:
+public abstract class Shape{
+public abstract void draw();
+}
+
+Interface
+Interface can have only abstract methods. Since Java 8, it can have default and static methods also.
+Interface supports multiple inheritance.
+Interface has only static and final variables.
+Interface can't provide the implementation of abstract class.
+The interface keyword is used to declare interface.
+An interface can extend another Java interface only.
+An interface can be implemented using keyword "implements".
+Members of a Java interface are public by default.
+Example:
+public interface Drawable{
+void draw();
+}
+
+Abstract method
+A method without body (no implementation) is known as abstract method. 
+public abstract int myMethod(int n1, int n2); --> As you see this has no body.
+Abstract methods don’t have body, they just have method signature as shown above.
+If a regular class extends an abstract class, then the class must have to implement all the abstract methods of abstract parent class or it has to be declared abstract as well. Se a classe filha nao implementar os Abstract Method, da ruim
+
+Abstract variable
+Nao tem
+
+-----
+
+Concrete Class
+These are the regular Java classes. A derived class that provides the basic implementations for all of the methods that are not already implemented in the base class is known as a concrete class. In other words, it is regular Java classes in which all the methods of an abstract class are implemented. We can create an object of the concrete class directly. Remember that concrete class and abstract class are not the same.
+
+-----
+
+Singleton Class
+A class that has only an object at a time is known as a singleton class. Still, if we are trying to create an instance a second time, that newly created instance points to the first instance. If we made any alteration inside the class through any instance, the modification affects the variable of the single instance, also.
+Create a private constructor.
+Create a static method (by using the lazy initialization) that returns the object of the singleton class.
+
+-----
+
+POJO Class
+In Java, POJO stands for Plain Old Java Object. A Java class that contains only private variables, setter and getter is known as POJO class. It is used to define Java objects that increase the reusability and readability of a Java program. The class provides encapsulation. It is widely used in Java because it is easy to understand these classes. POJO class has the following properties:
+
+It does not extend the predefined classes such as Arrays, HttpServlet, etc.
+It cannot contain pre-specified annotations.
+It cannot implement pre-defined interfaces.
+It is not required to add any constructor.
+All instance variables must be private.
+The getter/ setter methods must be public.
+
+Inner class
+Java allows us to define a class within a class and such classes are known as nested classes. It is used to group the classes logically and to achieve encapsulation. The outer class members (including private) can be accessed by the inner class.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Overriding
+
+Declaring a method in sub class which is already present in parent class is known as method overriding. Overriding is done so that a child class can give its own implementation to a method which is already provided by the parent class. In this case the method in parent class is called overridden method and the method in child class is called overriding method. 
+
+No caso, mesmo metodo name com MESMOS PARAMETROS
+
+class Human{
+   //Overridden method
+   public void eat()
+   {
+      System.out.println("Human is eating");
+   }
+}
+class Boy extends Human{
+   //Overriding method
+   public void eat(){
+      System.out.println("Boy is eating");
+   }
+   public static void main( String args[]) {
+      Boy obj = new Boy();
+      //This will call the child class version of eat()
+      obj.eat();
+   }
+}
+
+-------------------------------------------------------------------------------------------------------------------
+
+Overloading
+
+Method overloading is a feature of Java in which a class has more than one method of the same name and their parameters are different.
+No exmeplo abaixo, todos os netodos poderiam ser void com parametros diferentes (int, string, double..)
+
+class CalculateSquare
+ { 
+public void square()
+ { 
+System.out.println("No Parameter Method Called");
+ } 
+public int square( int number )
+ {
+int square = number * number;
+System.out.println("Method with Integer Argument Called:"+square); 
+}
+public float square( float number ) 
+{
+ float square = number * number;
+ System.out.println("Method with float Argument Called:"+square); 
+}
+public static void main(String[] args)
+  {
+    CalculateSquare obj = new CalculateSquare();
+    obj.square();
+    obj.square(5);   
+    obj.square(2.5);   
+  }
+ }
+
+-------------------------------------------------------------------------------------------------------------------
+
+Assinatura signature
+
+Eh o nome da assinatura mais parametros
+
+public static int nomeMetodo(int x, int y){ }
+nomeMetodo(int x, int y) ----> assinatura signature
