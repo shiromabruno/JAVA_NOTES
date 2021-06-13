@@ -184,6 +184,71 @@ public class Test
 
 Generics
 
+Ao invez de fazer varias classes abaixo para Integer, String... podemos criar Generics MyClass<T>
+
+-----
+public class MyClassDouble{
+Double i;
+MyClassDouble(Double i){
+this.i = i;
+}
+void printStuff(){
+SOUT(i);
+}
+}
+
+public class MyClass<T>{
+T obj;
+MyClass (T ob){
+obj = ob;
+}
+}
+Pra chamar: 
+MyClass<Integer> asd = new MyClass<>(10);
+MyClass<Double> qwe = new MyClass<>(10.5);
+
+public class MyClass<T, X>{
+T obj;
+T objx;
+MyClass (T ob, T objx){
+obj = ob;
+this.objx = objx;
+}
+}
+Para chamar:
+MyClass<Integer, Double> asd = new MyClass<>(10, 10.5);
+
+-----
+
+public class Numericos<T extends Number>{   -----> colocou isso pra garantir que oq tem q passar como parametro eh Numer (Integer, Double, Float...)
+T ob;
+Numericos(T ob){
+this.ob = ob;
+}
+double square(){
+return ob.intValue() * ob.doubleValue();  ---> se nao tivesse o extends Number, ia reclamar aqui falando que nao pote T * T [poderiam passar String...]
+}
+}
+Para chamar:
+Numericos<Integer> asd = new Numericos<>(4);
+SOUT(asd.square());
+
+-----
+
+public class Numericos<T extends Number>{   
+T num;
+Numericos(T ob){
+this.num = ob;
+}
+boolean absEqual(Numericos<?> objeto){   ====> Antes estava T. Precisa do ? pois nao sabemos qual Type sera, pode ser Double, Float...
+if (Math.abs(num.doubleValue()) == Math.abs(objeto.num.doubleValue()))
+   return true;
+return false;
+}
+Numericos<Integer> asd = new Numericos<>(4);
+Numericos<Double> qwe = new Numericos<>(4.0);
+asd.absEqual(qwe);   ----> quando estava com ? reclamou falando q precisava ser INTEGER (pois o primeiro objeto asd transformou o T num em INTEGER (???) ai ele esperava que o qwe fosse INTEGER tbm, mas na verdade ele eh DOUBLE)
+
 -------------------------------------------------------------------------------------------------------------------
 
 Herança heranca inherits inheritance
