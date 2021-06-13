@@ -1,0 +1,176 @@
+- JAVA_HOME: must point to installation directory of JDK.
+- JRE_HOME: must point to installation directory of JRE.
+- CLASSPATH: contains libraries path which JVM will look for.
+- PATH: normal environment variable on Windows. (tem varias coisas, umas delas eh o caminho do C:\Program Files\Java\jdk1.8.0_211\bin para rodar JAVAC no cmd)
+
+echo %JAVA_HOME% --> no CMD --> C:\Program Files\Java\jdk1.8.0_211
+
+'javac' is not recognized as an internal or external command, operable program or batch file
+It means that javac.exe executable file, which exists in bin directory of JDK installation folder is not added to PATH environment variable. You need to add JAVA_HOME/bin folder in your machine's PATH to solve this error.
+--> entrar no environemtn variables do windows, ir no Path e Edit, colocar o caminho do Bin que tem o Javac (C:\Program Files\Java\jdk1.8.0_211\bin)
+
+.JAVA --> arquivo for humans
+.CLASS --> compilado pelo JVM
+
+C:\Program Files (x86)\Common Files\Oracle\Java\javapath
+
+-------------------------------------------------------------------------------------------------------------------
+
+java -jar target/algamoney-api-1.0.0-SNAPSHOT.jar
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+
+Compiling on the Command line with Java SDK
+
+The primary Java SDK tools, which can be accessed from a command prompt/shell, are:
+  javac             // the compiler
+  java              // loader/interpreter
+Windows versions of these filenames would be:
+  javac.exe
+  java.exe
+
+Using the javac command
+Source code files will end in .java
+
+To compile a source code file, the command format is:
+    javac filenmame
+Examples:
+    javac Example1.java
+    javac MyProg.java
+    javac Arithmetic.java
+    or javac calc/*.java --> tudo dentro do pacote calc
+The result will be a file (or files) ending in .class
+For every class in a source code file, a full .class file is created
+
+To run a java program, use the java command. Basic format:
+   java main-class
+In this format, substitute (for main-class above) the name of the class that contains the main() method that is the start of your desired program
+Examples:
+  java Arithmetic        // runs main() in class Arithmetic
+  java Fred              // runs main() in class Fred
+
+-------------------------------------------------------------------------------------------------------------------
+
+java -Xmx100m com.acme.example.ListUsers fred joe bert
+The above is going to cause the java command to do the following:
+
+Search for the compiled version of the com.acme.example.ListUsers class.
+Load the class.
+Check that the class has a main method with signature, return type and modifiers given by public static void main(String[]). (Note, the method argument's name is NOT part of the signature.)
+Call that method passing it the command line arguments ("fred", "joe", "bert") as a String[].
+
+-------------------------------------------------------------------------------------------------------------------
+foreach FOR EACH
+
+String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+for (String i : cars) {
+  System.out.println(i);
+}
+
+-------------------------------------------------------------------------------------------------------------------
+IF ELSE IFELSE ternary tenary
+
+variable = (condition) ? expressionTrue :  expressionFalse;
+int time = 20;
+String result = (time < 18) ? "Good day." : "Good evening.";
+
+-------------------------------------------------------------------------------------------------------------------
+Difference map and hashmap
+HashMap<String, Object> map = new HashMap<String, Object>();  --> will allow the use of any public functions in HashMap (which includes the Map interface).
+Map<String, Object> map = new HashMap<String, Object>();      --> will only allow the use of functions defined in the Map interface
+
+Map is an interface that HashMap implements.
+
+The difference is that in the second implementation your reference to the HashMap will only allow the use of functions defined in the Map interface, while the first will allow the use of any public functions in HashMap (which includes the Map interface).
+
+Difference list and arraylist
+List<String> al = new ArrayList<String>();
+ArrayList<String> al = new ArrayList<String>();
+
+List interface is implemented by the classes of ArrayList, LinkedList, Vector and Stack.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Lambda
+
+-------------------------------------------------------------------------------------------------------------------
+
+
+O método trim() só tira espaço do inicio e fim da String. 
+
+Exemplo: 
+String temp = " java ".trim();   
+System.out.println(temp);   
+
+
+Para tirar do meio da String vc pode usar o replace 
+String temp = "ja va";   
+System.out.print(temp.replace(" ", ""));  
+
+public static boolean isNumeric(String s){  // testa se o campo eh numerico
+    try{
+        Long.parseLong(s);
+        return true;
+    }
+    catch(NumberFormatException ex){
+        return false;
+    }
+}
+
+
+if(jTextField1.getText().trim().equals("")) {
+           JOptionPane.showMessageDialog(null, "Preecha o Campo");
+           return;
+        }
+
+____
+
+int i = Integer.parseInt(String x);
+double y = Double.parseDouble(String x);
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+O HashMap implementa a interface Map T<K,V>
+
+Quando você instancia um HashMap a sua capacidade inicial é 16, ou seja, você consegue inserir até 16 elementos no Map, sem a necessidade de criar novas posições. O load factor é um atributo que mensura em que momento o HashMap deve dobrar seu tamanho, ou seja, antes que você possa preencher as 16 posições, em algum momento o tamanho do HashMap irá dobrar de 16 para 32
+//Tamanho Inicial da Lista
+int initialSize = 16;
+
+//Valor do Load Factor
+double loadFactor = 0.75;
+double sizeToRehash = initialSize * loadFactor;
+
+No nosso caso o resultado será igual a 12. Isso significa
+ * que ao inserirmos 12 elementos em nosso HashMap,
+ * a lista dobrará de tamanho, ou seja, terá tamanho = 32.
+ *
+ * Depois o load factor é calculado novamente para o
+ * novo tamanho (32) e assim sucessivamente.
+
+----
+
+Map<String,String> example = new HashMap<String,String>();
+example.put( "K1", new String( "V1" ));
+example.put( "K2", new String( "V2" ));
+example.put( "K3", new String( "V3" ));
+
+String keyToSearch = "K1";
+if ( example.containsKey( keyToSearch ) ) {
+   System.out.println("Valor da Chave "+keyToSearch+
+   " = "+example.get(keyToSearch));
+   }else{
+       System.err.println("Chave não existe");
+   }
+
+Percorrer todo o HashMap
+for (String key : example.keySet()) {
+//Capturamos o valor a partir da chave
+    String value = example.get(key);
+    System.out.println(key + " = " + value);
+}
+
+
+

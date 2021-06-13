@@ -1,0 +1,161 @@
+
+java.applet -> The Java Applet Package.
+Esse pacote contém a classe Applet e várias interfaces que permitem a criação de applets, interação de applets com navegador e execução de clipes de áudio. Em Java 2, a classe javax.swing.JApplet é utilizada para definir um applet que utiliza componentes GUI Swing.
+
+
+java.awt -> The Java Abstract Windowing Toolkit Package.
+Esse pacote contém as classes e interfaces exigidas para criar e manipular interfaces gráficas com o usuário em Java 1.0 e 1.1. Em java 2, essas classes ainda podem ser utilizadas, mas os componentes GUI Swing dos pacotes javax.swing são frequentemente utilizadas em seu lugar.
+
+
+java.awt.color -> The Java Color Space Package.
+Esse pacote contém classes que suportam espaços de cor.
+
+
+java.awt.datatransfer -> The Java Data Transfer Package.
+Esse pacote contém classes e interface que permitem a transferência de dados entre um programa Java e a área de transferência do computador(uma área de armazenamento temporária para todos).
+
+
+java.awt.dnd -> The Java Drag-and-Drop Package.
+Esse pacote contém classes e interfaces que fornecem suporte para arrastar-e-soltar entre programas.
+
+
+java.awt.event -> The Java Abstract Windowing Toolkit Event Package.
+Esse pacote contém classes e interfaces que permitem o tratamento de eventos para componentes GUI nos pacotes java.awt e javax.swing.
+
+
+java.awt.font -> The Java Font Manipulation Package.
+Esse pacote contém classes e interfaces para manipular muitas fontes diferentes.
+
+
+java.awt.geom -> The Java Two-Dimensional Objects Package.
+Esse pacote contém classes para manipular objetos que representam imagens gráficas bidimensionais.
+
+
+java.awt.im -> The Java Input Method Framework Package.
+Esse pacote contém classes e uma interface que suporta entrada de idiomas japonês, coreano e chinês em um programa Java.
+
+
+java.awt.image
+java.awt.image.renderable -> The Java Image Package.
+Esses pacotes contém classes e interfaces que permitem armazenar e manipular imagens em um programa.
+
+
+java.awt.print -> The Java Printing Package. 
+Esse pacote contém classes e interfaces que suportam imprimir a partir de programas Java.
+
+
+java.beans.beancontext -> The Java Beans Package.
+Esse pacote contém classes e interfaces que permitem o programador criar componentes reutilizáveis de software.
+
+
+java.io -> The Java Input/Output Package.
+Esse pacote contém classes que suportam entrada e saída de dados.
+
+
+java.lang -> The Java Language Package.
+Esse pacote contém classes e interfaces requeridas por muitos programas Java e é importado automaticamente peo compilador em todos os programas.
+
+
+java.lang.ref -> The Reference Objects Package.
+Esse pacote contém classes que permitem interação entre um programa Java e o coletor de lixo.
+
+
+java.lang.reflect -> The Java Core Reflection Package.
+Esse pacote contém classes e interfaces que permitem a um programa descobrir dinamicamente as variáveis e métodos acessíveis a partir de uma classe durante a execução de um programa.
+
+
+java.math -> The Java Arbitary Precision Math Package.
+Esse pacote contém classes para executar aritimética de precisão arbitrária.
+
+
+java.net -> The Java Networking Package.
+Esse pacote contém classes que permitem aos programas comunicar-se via redes.
+
+
+java.rmi.activation
+java.rmi.dgc
+java.rmi.registry
+java.rmi.server -> The Java Remote Method Invocation Packages.
+Esses pacotes contém classes e interfaces que permitem ao programador criar programas Java distribuídos. Utilizando RMI, um programa pode chamar um método a partir de um programa separado no mesmo computador ou em um computador qualquer lugar na Internet (Invocação remota de método[RMI]).
+
+
+java.security
+java.security.acl
+java.security.cert
+java.security.interfaces
+java.security.spec -> The Java Security Packages.
+Esses pacotes contém classes e interfaces que permitem a um programa Java criptografar dados e controlar os privilégios de acesso concedidos a um programa Java para fins de segurança.
+
+
+java.sql -> The Java Database Connectivity Package.
+Esse pacote contém classes e interfaces que permitem a um programa Java interagir com um banco de dados.
+
+
+java.text -> The Java Text Package.
+Esse pacote contém classes e interfaces que permitem a um programa Java manipular números, datas, caracteres e strings. Esse pacote fornece muitos das capacidades de internacionalização do Java - recursos que permitem a um programa ser personalizado para um local específico (por exemplo, um applet pode exibir strings em idiomas diferentes com base no navegador em que está executando).
+
+
+java.util -> The Java Utilities Package.
+Esse pacote contém classes e interfaces como: manipulações de data e hora, processamento de números aleatórios (Random), armazenamento e processamento de grandes quantidades de dados, quebra de strings em pedaços menores chamados tokens(StringTokenizer) e outras capacidades.
+
+
+java.util.jar
+java.util.zip -> The Java Utilities Jar and ZIP Package.
+Esses pacotes contém classes de utilitários e interfaces que permitem a um programa Java combinar arquivos .class Java e outros arquivos de recursos(Como imagens e áudio) em arquivos compactados chamador arquivos Java archive(JAR) ou arquivos ZIP.
+
+
+javax.accessibility -> The Java Accessibility Package.
+Esse pacote contém classes e interfaces que permitem a um programa Java suportar tecnologias para pessoas com deficiências físicas; exemplo são leitores de tela e lentes de aumento de tela.
+
+
+javax.swing -> The Java Swing GUI Components Package.
+Esse pacote contém classes e interfaces para componentes GUI Swing do Java que fornecem suporte para GUIs portáveis.
+
+
+javax.swing.border -> The Java Swing Borders Package.
+Esse pacote contém classes e uma interface para desenhar bordas em torno de áreas em uma GUI.
+
+
+javax.swing.colorchooser -> The Java Swing Color Chooser Package.
+Esse pacote contém classes e interfaces para o diálogo predefinido JColorChooser para seleção de cores.
+
+
+javax.swing.event -> The Java Swing Event Package.
+Esse pacote contém classes e interfaces que permitem tratamento de eventos para componentes GUI no pacote javax.swing.
+
+javax.swing.filechooser -> The Java Swing File Chooser Package.
+Esse pacote contém classes e interfaces para JFileChooser, um diálogo predefinido para localizar arquivos em disco.
+
+
+java.swing.plaf
+java.swing.plaf.basic
+java.swing.plaf.metal
+java.swing.plaf.multi ->The Java Swing Pluggable-Look-and-Feel Package.
+
+Esses pacotes contém classes e uma interface utilizada para alternar a aparência e o comportamento de uma GUI baseada em Swing entre a Java, do Microsoft Windows e a do Unix Motif. O pacote também suporta desenvolvimento de uma aparência e comportamento personalizados para um programa Java.
+
+
+javax.swing.table -> The Java Swing Table Package.
+Esse pacote contém classes e interfaces para criar a manipular tabelas do tipo panilha.
+
+
+javax.swing.text -> The Java Swing Text Package.
+Esse pacote contém classes e interfaces para manipular componentes GUI baseados em texto no Swing.
+
+
+javax.swing.text.html
+javax.swing.text.html.parser -> The Java Swing HTML Text Package.
+Esses pacotes contém classes que fornece suporte para construir editores de texto HTML .
+
+
+javax.swing.rtf -> The Java Swing RTF Text Package.
+Esse pacote contém classes que fornece suporte para construir editores que suportam formatação rich-text.
+
+
+javax.swing.tree -> The Java Swing Tree Package.
+Esse pacote contém classes e interfaces para criar e manipular componentes GUI em árvore expansível.
+
+
+javax.swing.undo -> The Java Swing Undo Package. 
+Esse pacote contém classes e interfaces que suportam o fornecimento de capacidades de desfazer e refazer em um programa Java.
+

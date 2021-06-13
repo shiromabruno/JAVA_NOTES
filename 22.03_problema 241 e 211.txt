@@ -1,0 +1,9 @@
+Problema era que o java -version do CMD voltava q tava com java version 1.8.0_241, mas o jdk e java_home estavam com 1.8.0_211
+C:\Program Files (x86)\Common Files\Oracle\Java\javapath  ---> versao 241
+C:\Program Files\Java\jdk1.8.0_211\bin --> versao 211
+
+trocar o 
+C:\Program Files (x86)\Common Files\Oracle\Java\javapath
+por %JAVA_HOME%\bin
+
+la no environment > edit environment variable
