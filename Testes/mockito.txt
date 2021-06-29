@@ -1,3 +1,5 @@
+https://javacodehouse.com/blog/mockito-tutorial/
+
 Most of the classes we come across have dependencies. and often times methods delegates some of the work to other methods in other classes, and we call these classes dependencies. When unit testing such methods, if we only used JUnit, our tests will also depend on those methods as well. We want the unit tests to be independent of all other dependencies.
 
 eg: we want to test the method addCustomer in CustomerService class, and within this addCustomer method, the save method of the CustomerDao class is invoked. We don’t want to call the real implementation of the CustomerDao save() method for a few reasons:
