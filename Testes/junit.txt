@@ -1,0 +1,201 @@
+JUnit is the Java library used to write tests (offers support for running tests and different extra helpers - like setup and teardown methods, test sets etc.). Mockito is a library that enables writing tests using the mocking approach.
+
+
+package guru99.junit;		
+
+import static org.junit.Assert.*;				
+import org.junit.Test;		
+
+
+public class Junit4AssertionTest {				
+
+    @Test		
+    public void testAssert(){					
+        		
+        //Variable declaration		
+        String string1="Junit";					
+        String string2="Junit";					
+        String string3="test";					
+        String string4="test";					
+        String string5=null;					
+        int variable1=1;					
+        int	variable2=2;					
+        int[] airethematicArrary1 = { 1, 2, 3 };					
+        int[] airethematicArrary2 = { 1, 2, 3 };					
+        		
+        //Assert statements		
+        assertEquals(string1,string2);					
+        assertSame(string3, string4);					
+        assertNotSame(string1, string3);					
+        assertNotNull(string1);			
+        assertNull(string5);			
+        assertTrue(variable1<variable2);					
+        assertArrayEquals(airethematicArrary1, airethematicArrary2);					
+    }		
+}	
+
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+package guru99.junit;		
+
+import org.junit.runner.JUnitCore;		
+import org.junit.runner.Result;		
+import org.junit.runner.notification.Failure;		
+
+public class TestRunner {				
+			public static void main(String[] args) {									
+      Result result = JUnitCore.runClasses(Junit4AssertionTest.class);					
+			for (Failure failure : result.getFailures()) {							
+         System.out.println(failure.toString());					
+      }		
+      System.out.println("Result=="+result.wasSuccessful());							
+   }		
+}      
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+public class SampleTest {
+
+        @BeforeClass
+        public static void setUpBeforeClass() throws Exception {
+            
+            
+            //Method annotated with `@BeforeClass` will execute once before any of the test methods in this class.
+
+            //This method could be used to set up any test fixtures that are computationally expensive and shared by several test methods. e.g. establishing database connections 
+
+            //Sometimes several tests need to share computationally expensive setup (like logging into a database). While this can compromise the independence of tests, sometimes it is a necessary optimization. From http://junit.sourceforge.net/javadoc/org/junit/BeforeClass.html
+           
+        }
+
+        @AfterClass
+        public static void tearDownAfterClass() throws Exception {
+            
+            //Method annotated with `@AfterClass` will execute once after all of the test methods are executed in this class.
+
+            //If you allocate expensive external resources in a BeforeClass method you need to release them after all the tests in the class have run. Annotating a public static void method with @AfterClass causes that method to be run after all the tests in the class have been run. All @AfterClass methods are guaranteed to run even if a BeforeClass method throws an exception. From http://junit.sourceforge.net/javadoc/org/junit/AfterClass.html
+        }
+
+        @Before
+        public void setUp() throws Exception {
+             //Method annotated with `@Before` will execute before each test method in this class is executed.
+
+             //If you find that several tests need similar objects created before they can run this method could be used to do set up those objects (aka test-fixtures).
+        }
+        
+        @After
+        public void tearDown() throws Exception {
+             
+             //Method annotated with `@After` will execute after each test method in this class is executed.
+
+             //If you allocate external resources in a Before method you must release them in this method.
+        }
+
+        @Test
+        public void test1() {
+           
+           //A public void method annotated with @Test will be executed as a test case.
+        }
+
+        @Test
+        public void test2() {
+   
+            //Another test cases
+        }
+
+    }
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+@Test
+public void testAssetThatExamples() {
+
+    // 'theString' should contain 'S' and 'r'
+    assertThat("theString", both(containsString("S")).and(containsString("r")));
+
+    List<String> items = Arrays.asList("John", "James", "Julia", "Jim");
+
+    // items list should have James and Jim
+    assertThat(items, hasItems("James", "Jim"));
+
+    // Every item in the list should have the character 'J'
+    assertThat(items, everyItem(containsString("J")));
+
+    // check all of the matchers
+    assertThat("Once", allOf(equalTo("Once"), startsWith("O")));
+
+    // negation of all of the matchers
+    assertThat("Once", not(allOf(equalTo("test"), containsString("test"))));
+}
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Exceptions
+
+@Test(expected = FileNotFoundException.class) 
+    public void testReadFile() throws IOException { 
+        FileReader reader = new FileReader("test.txt");
+        reader.read();
+        reader.close();
+    }
+
+
+@Test
+    public void testReadFile2() { 
+        try {
+            FileReader reader = new FileReader("test.txt");
+            reader.read();
+            reader.close();
+            fail("Expected an IOException to be thrown");
+        } catch (IOException e) {
+            assertThat(e.getMessage(), is("test.txt (No such file or directory)"));
+        }
+                 
+    }
+
+@Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void testReadFile3() throws IOException {
+                
+        thrown.expect(IOException.class);
+        thrown.expectMessage(startsWith("test.txt (No such file or directory)"));
+        FileReader reader = new FileReader("test.txt");
+        reader.read();
+        reader.close();
+    }
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+In the following example, the getTotalCharactersWithoutSpaces method will count the number of characters ignoring any whitespace. We need to test this with different test input samples. Without Parameterized test, we would have to repeat the assertion for each of the test data which would make tests less readable and maintainable over time.
+
+@RunWith(Parameterized.class)
+public class GreetingTest {
+
+    @Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][] {
+                 { "hello world", 10 }, { "helloworld", 10 }, { "hello", 5 }
+                 //The first item in the array is the input, and second is the expected outcome.
+           });
+    }
+
+    private String input;
+    private int expected;
+    
+    //This constructor must be provided for the parameterized tests to work.
+    public GreetingTest(String input, int expected) {
+        this.input = input;
+        this.expected = expected;
+    }
+    
+    @Test
+    public void test() {
+        
+        Greeting greeting = new Greeting();
+        assertThat(greeting.getTotalCharactersWithoutSpaces(input), is(expected));
+    }
+
+}
