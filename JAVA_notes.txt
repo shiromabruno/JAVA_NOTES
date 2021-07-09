@@ -62,7 +62,7 @@ Check that the class has a main method with signature, return type and modifiers
 Call that method passing it the command line arguments ("fred", "joe", "bert") as a String[].
 
 -------------------------------------------------------------------------------------------------------------------
-foreach FOR EACH
+foreach FOR EACH forpara
 
 String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
 for (String i : cars) {
@@ -179,6 +179,10 @@ public class Test
         fobj.sayMessage("Geek");
     }
 }
+
+List<String> novidades = Arrays.asList("Lambdas", "Default Method",
+				"Stream API", "Date and Time API");
+novidades.forEach(n -> System.out.println(n));
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -433,7 +437,7 @@ if(jTextField1.getText().trim().equals("")) {
 -------------------------------------------------------------------------------------------------------------------
 
 Conversao Conversão
-Cast
+Cast parse
 
 Widening Casting (automatically) - converting a smaller type to a larger type size
 byte -> short -> char -> int -> long -> float -> double
@@ -492,6 +496,7 @@ double d = Double.valueOf(str).doubleValue();
 13) Convertendo String para integer
 str = "25";
 int i = Integer.valueOf(str).intValue();
+int x =Integer.parseInt("9");
 
 14) Convertendo uma String para um float
 float f = Float.valueOf(str).floatValue();
@@ -839,3 +844,85 @@ Problema no parent com Augusto CF2
 opcao projeto > clean
 colocar pluginmanagement no POM (dentro dos plugins e plugin)
 
+-------------------------------------------------------------------------------------------------------------------
+
+Optional - https://medium.com/@racc.costa/optional-no-java-8-e-no-java-9-7c52c4b797f1
+
+A principal proposta deste recurso é encapsular o retorno de métodos e informar se um valor do tipo <T> está presente ou ausente.
+= Optional<Cliente> retorno = Optional.empty();
+
+of​ - Retorna um Optional com o valor fornecido, mas o valor não pode ser nulo. Se não tiver certeza de que o valor não é nulo use Optional.ofNullable.
+= Optional<Cliente> retorno = Optional.of(buscaCliente(cpf));
+
+ofNullable​ - Se um valor estiver presente, retorna um Optional com o valor , caso contrário, retorna um Optional vazio. Este é um dos métodos mais indicados para criar um Optional.
+= Optional<Cliente> retorno = Optional.ofNullable(buscaCliente(cpf));
+
+filter​ - Se um valor estiver presente e o valor corresponder ao predicado retorna um Optional com o valor, se não, retorna um Optional vazio.
+= Optional<Cliente> retorno = buscaCliente(cpf).filter(cliente -> !cliente.getNome().isEmpty());
+
+isPresent​ - Se um valor estiver presente retorna true, se não, retorna false.
+if (retorno.isPresent()) {
+   System.out.println("Cliente encontrado.");
+} else {
+   System.out.println("Cliente não encontrado.");
+}
+
+get​ - Se um valor estiver presente retorna o valor, caso contrário, lança NoSuchElementException. Então para usar get é preciso ter certeza de que o Optional não está vazio.
+Optional<Cliente> retorno = Optional.ofNullable(buscaCliente(cpf));
+if (retorno.isPresent()) {
+   Cliente cliente = retorno.get();
+}
+
+ifPresent​ - Se um valor estiver presente, executa a ação no valor, caso contrário, não faz nada.
+public void login(String cpf, String senha) {
+   dao.buscaPorCPF(cpf).
+      ifPresent(cliente -> cliente.realizaLogin(senha));
+}
+
+map​ - Se um valor estiver presente retorna um Optinal com o resultado da aplicação da função de mapeamento no valor, caso contrário, retorna um Optional vazio.
+if (optCliente.isPresent()) {
+   String nome = optCliente.map(Cliente::getNome);
+}
+
+flatMap​ - Semelhante a map, se um valor estiver presente, retorna o resultado da aplicação da função de mapeamento no valor, caso contrário retorna um Optional vazio. A diferença é que flatMap pode se aplicado a um mapeamento que também retorna um Optional.
+Endereco endereco =
+   buscaCliente(cpf).flatMap(Cliente::getEndereco).get();
+
+-------------------------------------------------------------------------------------------------------------------
+
+ModelMapper
+
+public class Pedido {
+	private Endereco destino;
+	private List<Produto> produtos = new ArrayList<>();
+	private Cliente cliente;
+}
+
+public class PedidoDto {		
+	private String ruaDestino;
+	private String numeroDestino;
+	private String cidadeDestino;
+	private String cepDestino;
+	private String cliente;
+	private List<ProdutoDto> produtos;
+//getters e setters omitidos
+}
+
+ModelMapper mapper = new ModelMapper();
+PedidoDto dto = mapper.map(pedido, PedidoDto.class); //já foi populado
+
+O ModelMapper é inteligente o suficiente para encontrar o caminho no domínio e chama os getter desde que existam essas informações no DTO. Quando não há como deduzir o caminho correto, é preciso configurá-lo programaticamente. Por exemplo, para pegar o nome do cliente é necessário chamar:
+
+String nome = pedido.getCliente().getNome().getSobreNome(); ==> tem que pegar 2 atributos e juntar em UM SO
+peditoDto.setCliente(nome);
+
+Nesse caso o ModelMapper precisa de uma dica pois não tem como deduzir esta chamada. Para tal, existe o PropertyMap que configura programaticamente o mapeamento entre a fonte (source()) e o destino (map()) :
+
+mapper.addMappings(new PropertyMap<Pedido, PedidoDto>() {
+
+ @Override
+ protected void configure() {
+   String nome = source().getCliente().getNome().getSobreNome();
+   map().setCliente(nome);
+ }}
+);
