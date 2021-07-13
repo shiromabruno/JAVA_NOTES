@@ -504,6 +504,36 @@ Exemplo: Classe Cliente que tem telefone
 @CollectionTable cria uma tabela separada. Usado pra criar uma entidade fraca, embora nao seja entidade
 The ElementCollection values are always stored in a separate table. The table is defined through the @CollectionTable annotation or the <collection-table> element. The CollectionTable defines the table's name and @JoinColumn or @JoinColumns if a composite primary key.
 
+@Embeddable
+Esse tipo de classe funciona como campos dentro de uma Entidade no JPA, isso significa entre outras coisas, que uma classe Embeddable só poderá ser salva no banco de dados, estando dentro de uma Entidade (Entity class). Exemplo:
+@Entity
+@Table(name="tb_user")
+public class User{
+private String nome;
+private Endereco endereco;
+@Embedded
+public Endereco getEndereco(){
+  }
+}
+@Embeddable
+public class Endereco{
+private String rua;
+private Integer numero;
+}
+Acima temos duas classes: User e Endereco, onde User é uma Entidade e Endereco é uma classe embutida (Embeddable). Com esquema acima é gerado apenas uma tabela chamada “tb_user” com os seguintes campos: nome, rua e numero. Perceba que a classe Endereco transformasse em campos para a tabela User. A decisão de utilizar ou não uma classe @Embeddable depende diretamente de cada regra de negócio, pois alguns poderiam questionar: Porque não criar uma tabela tb_endereco e apenas fazer a relação com as classes necessárias? Bom, essa questão depende de cada caso e cabe a você analisar qual a melhor opção.
+
+@EmbeddedId: Define que o atributo é o id da entidade, dessa forma ele substitui o @Id pelo @EmbeddedId indicando que é um id composto.
+Exemplo:
+@Embeddable
+public class FuncionarioId {
+    private String nome;
+    private String sobreNome;
+@Entity
+public class Funcionario {
+    @EmbeddedId
+    private FuncionarioId funcionarioId; ---> o ID eh objeto do FuncionarioId que eh composto por nome e sobrenome
+    private String email;
+No exemplo do projeto Modelo_Concceitual, ItemPedido (tabela) tem ItemPedidoPK id(pedido_id e produto_id), desconto, quantidade e preco
 
 @Inheritance
 Usado pra falar quando a classe eh pai e tera heranca
@@ -549,3 +579,39 @@ public class ClienteNewDTO implements Serializable{
 @NotEmpty(message="Preenchimento obrigatorio - ClienteNewDTO.class")
 @Length(min=5, max=120, message="O  tamanho deve ser entre 5 e 120 caracteres")
 private String nome;
+
+@Profile("dev"), define perfil que sera executado essa classe de config. Faz linkagem com arquivo application.properties. Nesse exemplo, o propertites tem:
+spring.profiles.active=dev. Tbm necessita de um application-dev.properties onde ira conter as outras infos do perfil
+@Configuration
+//Especifica que todos os Bean que tiverem nessa classe so serao ativos se no application.properties tiver ativo o "test"
+@Profile("dev")
+public class DevConfig {
+...
+@Value("${spring.jpa.hibernate.ddl-auto}")
+	private String strategy;  ---> no exemplo do Modelo_Conceitual, tem o "create" (que esta em application-dev.properties): spring.jpa.hibernate.ddl-auto=create
+
+
+@Constraint(validatedBy = ClienteInsertValidator.class)
+@Target({ ElementType.TYPE })
+@Retention(RetentionPolicy.RUNTIME)
+//Esse ClienteInsert passara a ser a nossa nova notacao ---> ficou em cima da classe alvo: @ClienteInsert public class ClienteNewDTO implements Serializable{
+//Tambem tera que criar o Validator para programar as caracteristicas da notacao
+public @interface ClienteInsert {
+	String message() default "Erro de validação - ClienteInsert.class";
+	Class<?>[] groups() default {};
+	Class<? extends Payload>[] payload() default {};
+}
+Precisa da classe ClienteInsertValidator.class
+public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
+List<FieldMessage> list = new ArrayList<>();
+...
+if(objDto.getTipo().equals(TipoCliente.PESSOAFISICA.getCod()) && !BR.isValidCPF(objDto.getCpfOuCnpj()) ) {
+	    	list.add(new FieldMessage("cpfOuCnpj", "CPF invalido - ClienteInsertValidator.class"));
+	    }
+...
+for (FieldMessage e : list) {
+			context.disableDefaultConstraintViolation();
+			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())
+					.addConstraintViolation();
+		}
+return list.isEmpty();
