@@ -556,7 +556,7 @@ Abstract class
 1) Abstract class can have abstract and non-abstract methods.
 2) Abstract class doesn't support multiple inheritance.
 3) Abstract class can have final, non-final, static and non-static variables.
-4) Abstract class can provide the implementation of interface.
+4) Abstract class can provide the implementation of interface. (NAO PRECISA IMPLEMENTAR TUDO CASO NAO QUEIRA)
 5) The abstract keyword is used to declare abstract class.
 6) An abstract class can extend another Java class and implement multiple Java interfaces.
 7) An abstract class can be extended using keyword "extends".
@@ -991,3 +991,38 @@ SimpleDateFormat - import java.text.SimpleDateFormat;
 Formatar de Wed Jul 14 17:43:31 BRT 2021 para 14/07/2021 05:48:13
 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 builder.append(sdf.format(getInstante()));
+
+import java.util.Date;
+sm.setSentDate(new Date(System.currentTimeMillis())); ---> pega o time do servidor
+
+-------------------------------------------------------------------------------------------------------------------
+
+Envio de email
+
+import org.springframework.mail.SimpleMailMessage;
+Modelo Conceitual
+
+@Override
+	public void sendOrderConfirmationEmail(Pedido obj) {
+		SimpleMailMessage sm = prepareSipleMailMessageFromPedido(obj);
+		sendEmail(sm);
+	}
+
+	protected SimpleMailMessage prepareSipleMailMessageFromPedido(Pedido obj) {
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(obj.getCliente().getEmail());
+		sm.setFrom(sender);
+		sm.setSubject("Pedido confirmado! Codigo: " + obj.getId());
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText(obj.toString());
+		return sm;
+	}
+
+-------------------------------------------------------------------------------------------------------------------
+
+Logger
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+//Tipo static pra nao ter que criar para todo email. So um ja eh o suficiente
+	private static final Logger LOG = LoggerFactory.getLogger(MockEmailService.class) --> LOG dessa classe MockEmailService
