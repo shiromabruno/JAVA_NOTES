@@ -560,7 +560,7 @@ Exemplo:
 @JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataVencimento;
 
-@MapsId 
+@MapsId @Mapid
 No meu uso, foi no caso de OneToOne (pode ter outros...) 
 Relacionamento 1 pra 1 (1 pagamento so tem 1 pedido)
 Na classe PEDIDO:

@@ -962,3 +962,32 @@ public static TipoCliente toEnum(Integer cod) {
 		
 		throw new IllegalArgumentException("Id invalido: " + cod);
 	}
+
+-------------------------------------------------------------------------------------------------------------------
+toString --> transforma o objeto em string
+Botao direito > source > generate ToString()
+@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Quantidade: ");
+		builder.append(getQuantidade());
+		builder.append(", Preco unitario: ");
+		builder.append(getPreco());
+		builder.append(", Subtotal: ");
+		builder.append(getSubValor());
+		builder.append("\n");
+		return builder.toString();
+	}
+System.out.println(obj); // Colocando o obj dentro de um PRINTLN, automaticamente chama o toString desse objeto!
+
+-------------------------------------------------------------------------------------------------------------------
+NumerFormat - import java.text.NumberFormat;
+Formatar de 2000.0 para R$ 2.000,00
+NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+builder.append(nf.format(getSubValor()));
+
+SimpleDateFormat - import java.text.SimpleDateFormat;
+Formatar de Wed Jul 14 17:43:31 BRT 2021 para 14/07/2021 05:48:13
+SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+builder.append(sdf.format(getInstante()));
