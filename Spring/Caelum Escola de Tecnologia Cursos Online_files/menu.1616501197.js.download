@@ -1,0 +1,17 @@
+let body=document.querySelector('body')
+body.addEventListener('click',acoesMenu)
+let menu=document.querySelector('.menu');let menuCover=document.querySelector('.menu-cover')
+function acoesMenu(event){if(event.target.matches('.js-icon__menu')){menu.classList.add('menu--active')
+menuCover.classList.add('menu-cover--show')
+body.classList.add('overflow')
+return}
+if(event.target.matches('.menu__close')){menu.classList.remove('menu--active')
+menuCover.classList.remove('menu-cover--show')
+body.classList.remove('overflow')
+return}
+if(event.target.matches('.menu-cover')&&menu.classList.contains('menu--active')){menu.classList.remove('menu--active')
+menuCover.classList.remove('menu-cover--show')
+body.classList.remove('overflow')
+return}}
+window.addEventListener('scroll',function(e){if(window.scrollY>200&&menu.classList.contains('menu--active')){menu.classList.remove('menu--active')
+menuCover.classList.remove('menu-cover--show')}})

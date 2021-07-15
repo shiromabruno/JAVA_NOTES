@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<!-- saved from url=(0113)https://www.caelum.com.br/apostila-java-web/spring-ioc-e-deploy-da-aplicacao#container-de-injecao-de-dependencias -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0"><title>Caelum Escola de Tecnologia Cursos Online</title><meta name="description" content="Cursos online de Java, Agile, Web, Front-end, PHP, .NET e Mobile mais reconhecidos no mercado, em São Paulo, Rio de Janeiro e Brasília. Didática diferenciada e instrutores qualificados."><link rel="canonical" href="https://www.caelum.com.br/apostila-java-web/spring-ioc-e-deploy-da-aplicacao"><link rel="icon" href="https://www.caelum.com.br/assets/favicon.1616501197.ico"><link href="./Caelum Escola de Tecnologia Cursos Online_files/css" rel="stylesheet" crossorigin=""><link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin=""><link rel="stylesheet" href="./Caelum Escola de Tecnologia Cursos Online_files/colors.1616501197.css"><link rel="stylesheet" href="./Caelum Escola de Tecnologia Cursos Online_files/colors.1616501197(1).css"><meta property="og:locale" content="pt_BR"><meta property="og:description" content="Cursos online de Java, Agile, Web, Front-end, PHP, .NET e Mobile mais reconhecidos no mercado, em São Paulo, Rio de Janeiro e Brasília. Didática diferenciada e instrutores qualificados."><meta property="og:title" content="Caelum Escola de Tecnologia Cursos Online"><meta property="og:site_name" content="Caelum"><meta property="og:url" content="https://www.caelum.com.br/apostila-java-web/spring-ioc-e-deploy-da-aplicacao"><meta property="og:image" content="https://www.caelum.com.br/assets/image/caelum-share.1616501197.png"><meta property="og:image:alt" content="Caelum logo"><meta property="fb:app_id" content="0"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="theme-color" content="#2A7AE4"><script async="" src="./Caelum Escola de Tecnologia Cursos Online_files/hotjar-158595.js.download"></script><script async="" src="https://script.hotjar.com/modules.c057a0a680ba2bae7796.js" charset="utf-8"></script><style type="text/css">iframe#_hjRemoteVarsFrame {display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;}</style><style type="text/css">/*===============================
+=            Choices            =
+===============================*/
+.choices {
+    position: relative;
+  }
+
+  .rd-choices {
+    margin-bottom: 24px;
+    font-size: 16px;
+    background-color: #FFF;
+    height: 38px;
+  }
+
+  [class^="rdstation-popup-position"]:not(.floating-button) .choices {
+    height: 45px;
+  }
+
+  .choices:focus {
+    outline: none;
+  }
+
+  .choices:last-child {
+    margin-bottom: 0;
+  }
+
+  .choices.rd-is-disabled .rd-choices__inner,
+  .choices.rd-is-disabled .rd-choices__input {
+    background-color: #EAEAEA;
+    cursor: not-allowed;
+    user-select: none;
+  }
+
+  .choices.rd-is-disabled .rd-choices__item {
+    cursor: not-allowed;
+  }
+
+  .choices[data-type*="select-one"] {
+    cursor: pointer;
+  }
+
+  .choices[data-type*="select-one"] .rd-choices__inner {
+    padding-bottom: 7.5px;
+  }
+
+  .choices[data-type*="select-one"] .rd-choices__input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #DDDDDD;
+    background-color: #FFFFFF;
+    margin: 0;
+  }
+
+  .choices[data-type*="select-one"] .rd-choices__button {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==);
+    padding: 0;
+    background-size: 8px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -10px;
+    margin-right: 25px;
+    height: 20px;
+    width: 20px;
+    border-radius: 10em;
+    opacity: .5;
+  }
+
+  .choices[data-type*="select-one"] .rd-choices__button:hover, .choices[data-type*="select-one"] .rd-choices__button:focus {
+    opacity: 1;
+  }
+
+  .choices[data-type*="select-one"] .rd-choices__button:focus {
+    box-shadow: 0px 0px 0px 2px #00BCD4;
+  }
+
+  .choices[data-type*="select-one"]:after {
+    content: "";
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-color: #333333 transparent transparent transparent;
+    border-width: 5px;
+    position: absolute;
+    right: 11.5px;
+    top: 50%;
+    margin-top: -2.5px;
+    pointer-events: none;
+  }
+
+  .choices[data-type*="select-one"].rd-is-open:after {
+    border-color: transparent transparent #333333 transparent;
+    margin-top: -7.5px;
+  }
+
+  .choices[data-type*="select-one"][dir="rtl"]:after {
+    left: 11.5px;
+    right: auto;
+  }
+
+  .choices[data-type*="select-one"][dir="rtl"] .rd-choices__button {
+    right: auto;
+    left: 0;
+    margin-left: 25px;
+    margin-right: 0;
+  }
+
+  .choices[data-type*="select-multiple"] .rd-choices__inner,
+  .choices[data-type*="text"] .rd-choices__inner {
+    cursor: text;
+  }
+
+  .choices[data-type*="select-multiple"] .rd-choices__button,
+  .choices[data-type*="text"] .rd-choices__button {
+    position: relative;
+    display: inline-block;
+    margin-top: 0;
+    margin-right: -4px;
+    margin-bottom: 0;
+    margin-left: 8px;
+    padding-left: 16px;
+    border-left: 1px solid #008fa1;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==);
+    background-size: 8px;
+    width: 8px;
+    line-height: 1;
+    opacity: .75;
+    border-radius: 0;
+  }
+
+  .choices[data-type*="select-multiple"] .rd-choices__button:hover, .choices[data-type*="select-multiple"] .rd-choices__button:focus,
+  .choices[data-type*="text"] .rd-choices__button:hover,
+  .choices[data-type*="text"] .rd-choices__button:focus {
+    opacity: 1;
+  }
+
+  /* .rd-choices__inner {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 7.5px 7.5px 3.75px;
+    overflow: hidden;
+  } */
+
+  .rd-choices__inner {
+    border-radius: 2.5px;
+    font-size: 14px;
+    min-height: 38px;
+    border: 1px solid #5897fb;
+  }
+
+  .rd-is-focused .rd-choices__inner,
+  .rd-is-open .rd-choices__inner {
+    border-color: #5897fb !important;
+  }
+
+  .rd-is-open .rd-choices__inner {
+    border-radius: 2.5px 2.5px 0 0 !important;
+    border-bottom: none !important;
+  }
+
+  .rd-is-flipped.rd-is-open .rd-choices__inner {
+    border-radius: 0 0 2.5px 2.5px !important;
+    border-bottom: 1px solid #5897fb !important;
+  }
+
+  .choices__list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .rd-choices__list {
+    padding:4px !important;
+  }
+
+  .rd-choices__list--single {
+    display: inline-block;
+    padding: 4px 16px 4px 4px;
+    width: 100%;
+    line-height: 28px !important;
+  }
+
+  [class^="rdstation-popup-position"]:not(.floating-button) .rd-choices__list--single {
+    line-height: 35px !important;
+  }
+
+  [dir="rtl"] .rd-choices__list--single {
+    padding-right: 4px;
+    padding-left: 16px;
+  }
+
+  .rd-choices__list--single .rd-choices__item {
+    width: 100%;
+  }
+
+  .rd-choices__list--multiple {
+    display: inline;
+  }
+
+  .rd-choices__list--multiple .rd-choices__item {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 3.75px;
+    margin-bottom: 3.75px;
+    background-color: #00BCD4;
+    border: 1px solid #00a5bb;
+    color: #FFFFFF;
+    word-break: break-all;
+  }
+
+  .rd-choices__list--multiple .rd-choices__item[data-deletable] {
+    padding-right: 5px;
+  }
+
+  [dir="rtl"] .rd-choices__list--multiple .rd-choices__item {
+    margin-right: 0;
+    margin-left: 3.75px;
+  }
+
+  .rd-choices__list--multiple .rd-choices__item.rd-is-highlighted {
+    background-color: #00a5bb;
+    border: 1px solid #008fa1;
+  }
+
+  .rd-is-disabled .rd-choices__list--multiple .rd-choices__item {
+    background-color: #aaaaaa;
+    border: 1px solid #919191;
+  }
+
+  .choices__list--dropdown {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    margin-top: -1px;
+    overflow: hidden;
+    word-break: break-all;
+  }
+
+  .rd-choices__list--dropdown {
+    display: none;
+    z-index: 999999 !important;
+    background-color: #FFFFFF;
+    border-bottom-left-radius: 2.5px;
+    border-bottom-right-radius: 2.5px;
+    border-bottom: 1px solid #cacaca !important;
+    border-left: 1px solid #cacaca !important;
+    border-right: 1px solid #cacaca !important;
+  }
+
+  .rd-choices__list--dropdown.rd-is-active {
+    display: block;
+    border-bottom: 1px solid #5897fb !important;
+    border-left: 1px solid #5897fb !important;
+    border-right: 1px solid #5897fb !important;
+    margin-top: -1px !important;
+  }
+
+  .rd-is-open .rd-choices__list--dropdown {
+    border-color: #b7b7b7;
+  }
+
+  .rd-is-flipped .rd-choices__list--dropdown {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: -1px !important;
+    border-radius: .25rem .25rem 0 0;
+    border-top: 1px solid #5897fb !important;
+    border-bottom: none !important;
+  }
+
+  .rd-choices__list--dropdown .rd-choices__list {
+    position: relative;
+    max-height: 300px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position;
+  }
+
+  .rd-choices__list--dropdown .rd-choices__item {
+    position: relative;
+    padding: 10px;
+    font-size: 14px;
+    padding: 5px !important;
+  }
+
+  [dir="rtl"] .rd-choices__list--dropdown .rd-choices__item {
+    text-align: right;
+  }
+
+  @media (min-width: 640px) {
+    .rd-choices__list--dropdown .rd-choices__item--selectable {
+      padding-right: 100px;
+    }
+    .rd-choices__list--dropdown .rd-choices__item--selectable:after {
+      content: attr(data-select-text);
+      font-size: 12px;
+      opacity: 0;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    [dir="rtl"] .rd-choices__list--dropdown .rd-choices__item--selectable {
+      text-align: right;
+      padding-left: 100px;
+      padding-right: 10px;
+    }
+    [dir="rtl"] .rd-choices__list--dropdown .rd-choices__item--selectable:after {
+      right: auto;
+      left: 10px;
+    }
+  }
+
+  .rd-choices__list--dropdown .rd-choices__item--selectable.rd-is-highlighted {
+    background-color: #3875d7 !important;
+    color: #fff !important;
+  }
+
+  .rd-choices__list--dropdown .rd-choices__item--selectable.rd-is-highlighted:after {
+    opacity: .5;
+  }
+
+  .rd-choices__item {
+    cursor: default;
+  }
+
+  .rd-choices__item img {
+    width: 26px;
+    display: unset;
+  }
+
+  .rd-choices__item--selectable {
+    cursor: pointer;
+  }
+
+  .rd-choices__item--disabled {
+    cursor: not-allowed;
+    user-select: none;
+    opacity: .5;
+  }
+
+  .choices__heading {
+    font-weight: 600;
+    padding: 10px;
+  }
+
+  .rd-choices__heading {
+    font-size: 12px;
+    border-bottom: 1px solid #f7f7f7;
+    color: gray;
+  }
+
+  .rd-choices__button {
+    text-indent: -9999px;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 0;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  .rd-choices__button:focus {
+    outline: none;
+  }
+
+  .rd-choices__input {
+    display: inline-block;
+    vertical-align: baseline;
+    background-color: #f9f9f9;
+    border: 1px solid #aaa !important;
+    font-size: 14px;
+    margin-bottom: 5px;
+    border: 0;
+    border-radius: 0;
+    max-width: 100%;
+    padding: 4px 0 4px 2px;
+    margin-top: 6px;
+    height:28px !important;
+  }
+
+  .rd-choices__input:focus {
+    outline: 0;
+  }
+
+  [dir="rtl"] .rd-choices__input {
+    padding-right: 2px;
+    padding-left: 0;
+  }
+
+  .rd-choices__placeholder {
+    opacity: .5;
+  }
+
+  .rd-choices__input.is-hidden,
+  .choices[data-type*="select-one"] .rd-choices__input.is-hidden,
+  .choices[data-type*="select-multiple"] .rd-choices__input.is-hidden {
+    display: none !important;
+  }
+
+  /*=====  End of Choices  ======*/
+</style></head><body class=""> <script async="" src="./Caelum Escola de Tecnologia Cursos Online_files/analytics.js.download"></script><script async="" src="./Caelum Escola de Tecnologia Cursos Online_files/fbevents.js.download"></script><script src="./Caelum Escola de Tecnologia Cursos Online_files/avatarOnError.1623166499.js.download"></script> <script>!function(f,b,e,v,n,t,s) {if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)}; if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0; t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '2143375715701577'); fbq('track', 'PageView');</script> <header class="header container"><section class="header__content">
+<a href="https://www.caelum.com.br/"><h1 class="header__logo"></h1></a>
+<span class="header__menu--icon js-icon__menu"></span></section><section class="menu"><section class="menu__tools menu--division">
+<button title="Fechar" class="menu__close"></button></section><div class="menu__select-wrapper">
+<label for="select-chapter" class="menu__select-chapter">Capítulos</label>
+<select id="select-chapter" class="menu--division workbook__field chapter-nav"><option selected="">Selecione...</option><option class="enfrentando-o-java-na-web" value="enfrentando-o-java-na-web">
+1. Enfrentando o Java na Web</option><option class="bancos-de-dados-e-jdbc" value="bancos-de-dados-e-jdbc">
+2. Bancos de dados e JDBC</option><option class="o-que-e-java-ee" value="o-que-e-java-ee">
+3. O que é Java EE?</option><option class="novo-projeto-web-usando-eclipse" value="novo-projeto-web-usando-eclipse">
+4. Novo projeto Web usando Eclipse</option><option class="servlets" value="servlets">
+5. Servlets</option><option class="javaserver-pages" value="javaserver-pages">
+6. JavaServer Pages</option><option class="usando-taglibs" value="usando-taglibs">
+7. Usando Taglibs</option><option class="tags-customizadas-com-tagfiles" value="tags-customizadas-com-tagfiles">
+8. Tags customizadas com Tagfiles</option><option class="mvc-model-view-controller" value="mvc-model-view-controller">
+9. MVC - Model View Controller</option><option class="recursos-importantes-filtros" value="recursos-importantes-filtros">
+10. Recursos importantes: Filtros</option><option class="spring-mvc" value="spring-mvc">
+11. Spring MVC</option><option class="spring-mvc-autenticacao-e-autorizacao" value="spring-mvc-autenticacao-e-autorizacao">
+12. Spring MVC: Autenticação e autorização</option><option class="spring-ioc-e-deploy-da-aplicacao" value="spring-ioc-e-deploy-da-aplicacao">
+13. Spring IoC e deploy da aplicação</option><option class="uma-introducao-pratica-ao-jpa-com-hibernate" value="uma-introducao-pratica-ao-jpa-com-hibernate">
+14. Uma introdução prática ao JPA com Hibernate</option><option class="e-agora" value="e-agora">
+15. E agora?</option><option class="apendice-integracao-do-spring-com-jpa" value="apendice-integracao-do-spring-com-jpa">
+16. Apêndice - Integração do Spring com JPA</option><option class="apendice-topicos-da-servlet-api" value="apendice-topicos-da-servlet-api">
+17. Apêndice - Tópicos da Servlet API</option>
+</select></div><form action="https://www.caelum.com.br/resultados" class="menu__search menu--division">
+<input type="search" name="q" class="menu__search__course" placeholder="_busque um assunto">
+<button type="submit" class="menu__search__button " title="Buscar"></button></form><nav class="menu__navigation"><ul><li class="menu--division"><a href="https://www.caelum.com.br/curso-java-web">Curso desta apostila</a></li><li class="menu--division"><a href="https://www.caelum.com.br/apostilas#download">Download da apostila</a></li><li class="menu--division"><a href="https://www.caelum.com.br/apostilas">Outras apostilas abertas</a></li></ul></nav></section></header><link rel="stylesheet" href="./Caelum Escola de Tecnologia Cursos Online_files/highlight.min.1616501197.css"> <script src="./Caelum Escola de Tecnologia Cursos Online_files/highlight.min.1616501197.js.download"></script> <script>hljs.initHighlightingOnLoad();</script> <div class="overlay"></div><section class="form-lead"><link rel="stylesheet" href="./Caelum Escola de Tecnologia Cursos Online_files/formulario-download-apostilas.1616501197.css"> <script>function antispam(){
+        var el = document.querySelector('input[name="caelum_blank"]');
+        return el.value == '';
+    }</script> <form class="workbook__form" action="https://www.rdstation.com.br/api/1.2/conversions" method="post" onsubmit="return antispam()">
+<input type="hidden" name="token_rdstation" value="4b7bbfbbbe5c7e29f1c12ecb3b59096b">
+<input type="hidden" name="identificador" value="caelum-apostilas-baixar-apostilas-do-site">
+<input type="hidden" name="_is" value="6">
+<input type="hidden" name="c_utmz" value="">
+<input type="hidden" name="traffic_source" value="">
+<input type="hidden" name="client_id" value="">
+<input type="hidden" name="redirect_to" value="https://www.caelum.com.br/download-concluido">
+<input type="hidden" name="_doe" value="">
+<input type="hidden" name="privacy_data[browser]" id="privacy_data_browser">
+<input type="hidden" name="thankyou_message" value="Obrigada! Você receberá sua apostila em seu e-mail! Se não receber, lembre-se de verificar na caixa de Spam!" disabled=""><label class="workbook__name" for="nome">Nome</label>
+<input class="workbook__field" type="text" id="nome" name="name" required="">
+<input style="position:absolute;left:-2000px;opacity:0.1" type="text" name="caelum_blank">
+<label class="workbook__name" for="email">e-mail</label>
+<input class="workbook__field" type="text" id="email" name="email" required="">
+<label class="workbook__name" for="areaDeInteresse">Qual área mais te interessa hoje?</label>
+<select class="workbook__field" id="areaDeInteresse" name="custom_fields[1065805]" required=""><option disabled="" selected=""></option><option value="ux-usabilidade-mobile-web">UX e Usabilidade Aplicados em Mobile e Web</option><option value="java-web">Java para Desenvolvimento Web</option><option value="java-orientacao-objetos">Java e Orientação a Objetos</option><option value="html-css-javascript">Desenvolvimento Web com HTML, CSS e JavaScript</option><option value="python-orientacao-objetos">Python e Orientação a Objetos</option><option value="csharp-orientacao-objetos">C# e Orientação a Objetos</option>
+</select>
+<label class="workbook__name" for="objetivo">Qual o seu objetivo ao baixar a apostila da Caelum?</label>
+<select class="workbook__field" id="objetivo" name="custom_fields[1065819]" required=""><option disabled="" selected=""></option><option value="reforcar-um-conhecimento-que-ja-tenho">Reforçar um conhecimento que já tenho</option><option value="aprender-uma-nova-tecnologia">Aprender uma nova tecnologia</option><option value="estou-decidindo-o-que-vou-estudar-no-futuro">Estou decidindo o que vou estudar no futuro</option><option value="vou-tirar-uma-duvida-pontual">Vou tirar uma dúvida pontual</option><option value="me-preparar-para-um-novo-trabalho">Me preparar para um novo trabalho</option><option value="tenho-outro-objetivo">Tenho outro objetivo</option>
+</select>
+<button class="button button__primary button__extended" type="submit">baixar apostilas</button></form></section><section class="container"><div class="workbook__navigator"><a href="https://www.caelum.com.br/curso-java-web">Curso Java para Desenvolvimento Web</a> &gt; <a href="https://www.caelum.com.br/apostila-java-web">apostila</a> &gt; Capitulo 13</div><h1 class="workbook__name-course">Spring IoC e deploy da aplicação</h1></section><main class="container workbook-text"><p><em>"Fazer troça da filosofia é, na verdade, filosofar" -- Blaise Pascal</em></p><p>Nesse capítulo, você aprenderá:</p><ul><li>O que é um container de inversão de controller</li><li>Como gerenciar qualquer objeto e injetar dependências com o Spring</li><li>Implantar sua aplicação em qualquer container.</li></ul><h2 id="menos-acoplamento-com-inversao-de-controle-e-injecao-de-dependencias" class="subtitle">Menos acoplamento com inversão de controle e injeção de dependências</h2><p>Na nossa classe <code>TarefasController</code> usamos o <code>JdbcTarefaDao</code> para executar os métodos mais comuns
+no banco de dados relacionado com a <code>Tarefa</code>. Em cada método do controller criamos um <code>JdbcTarefaDao</code>
+para acessar o banco. Repare no código abaixo quantas vezes instanciamos o DAO na mesma classe:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+    <span class="hljs-meta"><span class="hljs-meta">@RequestMapping</span></span><span class="hljs-meta">(</span><span class="hljs-string"><span class="hljs-meta">"mostraTarefa"</span></span><span class="hljs-meta">)</span>
+    <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> String </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">mostra</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(Long id, Model model)</span></span></span><span class="hljs-function"> </span></span>{
+        JdbcTarefaDao dao = <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> JdbcTarefaDao();
+        model.addAttribute(<span class="hljs-string"><span class="hljs-string">"tarefa"</span></span>, dao.buscaPorId(id));
+        <span class="hljs-keyword"><span class="hljs-keyword">return</span></span> <span class="hljs-string"><span class="hljs-string">"tarefa/mostra"</span></span>;
+    }
+
+    <span class="hljs-meta"><span class="hljs-meta">@RequestMapping</span></span><span class="hljs-meta">(</span><span class="hljs-string"><span class="hljs-meta">"listaTarefas"</span></span><span class="hljs-meta">)</span>
+    <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> String </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">lista</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(Model model)</span></span></span><span class="hljs-function"> </span></span>{
+        JdbcTarefaDao dao = <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> JdbcTarefaDao();
+        model.addAttribute(<span class="hljs-string"><span class="hljs-string">"tarefas"</span></span>, dao.lista());
+        <span class="hljs-keyword"><span class="hljs-keyword">return</span></span> <span class="hljs-string"><span class="hljs-string">"tarefa/lista"</span></span>;
+    }
+
+    <span class="hljs-meta"><span class="hljs-meta">@RequestMapping</span></span><span class="hljs-meta">(</span><span class="hljs-string"><span class="hljs-meta">"adicionaTarefa"</span></span><span class="hljs-meta">)</span>
+    <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> String </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">adiciona</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(<span class="hljs-meta">@Valid</span> Tarefa tarefa, BindingResult result)</span></span></span><span class="hljs-function"> </span></span>{
+
+        <span class="hljs-keyword"><span class="hljs-keyword">if</span></span>(result.hasFieldErrors(<span class="hljs-string"><span class="hljs-string">"descricao"</span></span>)) {
+            <span class="hljs-keyword"><span class="hljs-keyword">return</span></span> <span class="hljs-string"><span class="hljs-string">"tarefa/formulario"</span></span>;
+        }
+
+        JdbcTarefaDao dao = <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> JdbcTarefaDao();
+        dao.adiciona(tarefa);
+        <span class="hljs-keyword"><span class="hljs-keyword">return</span></span> <span class="hljs-string"><span class="hljs-string">"tarefa/adicionada"</span></span>;
+    }
+
+    <span class="hljs-comment"><span class="hljs-comment">//outros métodos remove, altera e finaliza também criam a JdbcTarefaDao</span></span>
+  }</code></pre><p>A classe <code>TarefasController</code> instancia um objeto do tipo <code>JdbcTarefaDao</code> manualmente. Estamos
+repetindo a criação do DAO em cada método. Podemos melhorar o código, criar o <code>JdbcTarefaDao</code>
+no construtor da classe <code>TarefasController</code> e usar um atributo. Assim podemos apagar todas as
+linhas de criação do DAO:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> JdbcTarefaDao dao;
+
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">()</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.dao = <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> JdbcTarefaDao();
+      }
+
+      <span class="hljs-meta"><span class="hljs-meta">@RequestMapping</span></span><span class="hljs-meta">(</span><span class="hljs-string"><span class="hljs-meta">"mostraTarefa"</span></span><span class="hljs-meta">)</span>
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> String </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">mostra</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(Long id, Model model)</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-comment"><span class="hljs-comment">//dao já foi criado</span></span>
+          model.addAttribute(<span class="hljs-string"><span class="hljs-string">"tarefa"</span></span>, dao.buscaPorId(id));
+          <span class="hljs-keyword"><span class="hljs-keyword">return</span></span> <span class="hljs-string"><span class="hljs-string">"tarefa/mostra"</span></span>;
+      }
+
+      <span class="hljs-meta"><span class="hljs-meta">@RequestMapping</span></span><span class="hljs-meta">(</span><span class="hljs-string"><span class="hljs-meta">"listaTarefas"</span></span><span class="hljs-meta">)</span>
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> String </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">lista</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(Model model)</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-comment"><span class="hljs-comment">//dao já foi criado</span></span>
+          model.addAttribute(<span class="hljs-string"><span class="hljs-string">"tarefas"</span></span>, dao.lista());
+          <span class="hljs-keyword"><span class="hljs-keyword">return</span></span> <span class="hljs-string"><span class="hljs-string">"tarefa/lista"</span></span>;
+      }
+
+    <span class="hljs-comment"><span class="hljs-comment">//outros métodos também aproveitam o atributo dao</span></span>
+
+  }</code></pre><p>O nosso código melhorou, pois temos menos código para manter, mas há mais um problema. Repare que continuamos
+responsáveis pela criação do DAO. A classe que faz uso deste DAO está intimamente ligada com a maneira
+de instanciação do mesmo, fazendo com que ela mantenha um alto grau de <strong>acoplamento</strong>.</p><p>Dizemos que a classe <code>TarefasController</code> tem uma <strong>dependência</strong> com o <code>JdbcTarefaDao</code>. Vários métodos
+dela dependem do <code>JdbcTarefaDao</code>. No código acima continuamos a dar <code>new</code>  diretamente na implementação
+<code>JdbcTarefaDao</code> para usá-la. <strong>Nossa aplicação cria a dependência, chamando diretamente a classe específica.</strong></p><p>O problema em gerenciar a dependência diretamente na aplicação fica evidente se analisamos a classe
+<code>JdbcTarefaDao</code>. Se a classe precisar de um processo de construção mais complicado, precisaremos
+nos preocupar com isso em todos os lugares onde criamos o <code>JdbcTarefaDao</code>.</p><p>Para entender isso vamos verificar o construtor do DAO:</p><pre><code class="hljs java">  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> <span class="hljs-keyword"><span class="hljs-keyword">final</span></span> Connection connection;
+
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">()</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">try</span></span> {
+              <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.connection = <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> ConnectionFactory().getConnection();
+          } <span class="hljs-keyword"><span class="hljs-keyword">catch</span></span> (SQLException e) {
+              <span class="hljs-keyword"><span class="hljs-keyword">throw</span></span> <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> RuntimeException(e);
+          }
+      }
+      <span class="hljs-comment"><span class="hljs-comment">//métodos omitidos</span></span>
+  }</code></pre><p>Repare que aqui existe o mesmo problema. O DAO também resolve a sua dependência e cria através da
+<code>ConnectionFactory</code>, a conexão. Estamos acoplados à classe <code>ConnectionFactory</code> enquanto apenas queremos uma
+conexão. A classe está com a responsabilidade de procurar a dependência. Essa responsabilidade deve estar em
+outro lugar. Para melhorar, vamos então declarar a dependência em um lugar natural que é o construtor.
+O código fica muito mais simples e não precisa mais da <code>ConnectionFactory</code>:</p><pre><code class="hljs java">  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> <span class="hljs-keyword"><span class="hljs-keyword">final</span></span> Connection connection;
+
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(Connection connection)</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.connection = connection;
+      }
+
+      <span class="hljs-comment"><span class="hljs-comment">//métodos omitidos</span></span>
+  }</code></pre><p>Já com essa pequena mudança, não podemos criar o <code>JdbcTarefaDao</code> sem nos preocuparmos com a conexão antes.
+Veja como ficaria o código da classe <code>TarefasController</code>:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> JdbcTarefaDao dao;
+
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">()</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">try</span></span> {
+              Connection connection = <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> ConnectionFactory().getConnection();
+              <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.dao = <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> JdbcTarefaDao(connection);
+          } <span class="hljs-keyword"><span class="hljs-keyword">catch</span></span> (SQLException e) {
+              <span class="hljs-keyword"><span class="hljs-keyword">throw</span></span> <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> RuntimeException(e);
+          }
+      }
+      <span class="hljs-comment"><span class="hljs-comment">//métodos omitidos</span></span>
+  }</code></pre><p>A classe <code>TarefasController</code> não só criará o DAO, como também a conexão. Já discutimos que não queremos
+ser responsáveis, então vamos agir igual ao <code>JdbcTarefaDao</code> e declarar a dependência no construtor.
+Novamente vai simplificar demais o nosso código:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> JdbcTarefaDao dao;
+
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(JdbcTarefaDao dao)</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.dao = dao;  
+      }
+
+      <span class="hljs-comment"><span class="hljs-comment">//métodos omitidos</span></span>
+  }</code></pre><p>Assim cada classe delega a dependência para cima e não se responsabiliza pela criação. Quem for usar essa
+classe <code>TarefasController</code>, agora, vai precisar satisfazer as dependências. Mas quem no final se
+preocupa com a criação do DAO e com a conexão?</p><h2 id="container-de-injecao-de-dependencias" class="subtitle">Container de Injeção de dependências</h2><p>O padrão de projetos <strong>Dependency Injection (DI)</strong> (Injeção de dependências), procura resolver esses problemas.
+A ideia é que a classe não mais resolva as suas dependências por conta própria mas apenas declara que
+depende de alguma outra classe. E de alguma outra forma que não sabemos ainda, alguém resolverá essa
+dependência para nós. Alguém pega o controle dos objetos que liga (ou amarra) as dependências. Não estamos
+mais no controle, há algum container que gerencia as dependências e amarra tudo. Esse container já
+existia e já usamos ele sem saber.</p><p>Repare que com <code>@Controller</code> já definimos que a nossa classe faz parte do Spring MVC, mas a anotação vai
+além disso. Também definimos que queremos que o Spring controle o objeto. Spring é no fundo um container
+que dá <em>new</em> para nós e também sabe resolver e ligar as dependências. Por isso, o Spring também
+é chamado <strong>Container IoC</strong> (<em>Inversion of Control</em>) ou <strong>Container DI</strong>.</p><p>Essas são as principais funcionalidades de qualquer container de inversão de controle/injeção de dependência.
+O Spring é um dos vários outros containers disponíveis no mundo Java. Segue uma pequena lista com os
+containers mais famosos:</p><ul><li><strong>Spring IoC</strong> ou só <strong>Spring</strong> base de qualquer projeto Spring, popularizou DI e o desenvolvimento com POJOs</li><li><strong>JBoss Seam 2</strong> Container DI que se integra muito bem com JSF, principalmente na versão 1.2 do JSF</li><li><strong>Guice</strong> Container DI criado pelo Google que favoreceu configurações programáticas sem XML</li><li><strong>CDI</strong> Especificação que entrou com o Java EE 6, fortemente influenciado pelo JBoss Seam e Guice</li><li><strong>Pico</strong> Container muito leve e flexível, foi pioneiro nessa área</li><li><strong>EJB 3</strong> Container Java EE com um suporte limitado ao DI</li></ul><section class="banner__container">
+<img class="banner__logo" src="./Caelum Escola de Tecnologia Cursos Online_files/casa-do-codigo.1616501197.svg" alt="Logo da empresa"><div class="banner__spacing backgroundCDC"><h3 class="banner__title">Seus livros de tecnologia parecem do século passado?</h3><p class="banner__text">Conheça a <strong>Casa do Código</strong>, uma <strong>nova</strong> editora, com autores de destaque no mercado, foco em <strong>ebooks</strong> (PDF, epub, mobi), preços <strong>imbatíveis</strong> e assuntos <strong>atuais</strong>.<br>Com a curadoria da <strong>Caelum</strong> e excelentes autores, é uma abordagem <strong>diferente</strong> para livros de tecnologia no Brasil. Conheça os títulos e a nova proposta, você vai gostar.</p>
+<a class="banner__text" href="https://www.casadocodigo.com.br/">Casa do Código, livros para o programador</a></div></section><h2 id="container-spring-ioc" class="subtitle">Container Spring IoC</h2><p>O Spring Container sabe criar o objeto, mas também liga as dependências dele. Como o Spring está no controle,
+ele administra todo o ciclo da vida. Para isso acontecer será preciso definir pelo menos duas configurações:</p><ul><li>declarar o objeto como componente</li><li>ligar a dependência</li></ul><p>Para receber o DAO em nosso controlador, usaremos a anotação <strong><code>@Autowired</code></strong> acima do construtor
+(<em>wire</em> - amarrar). Isso indica ao Spring que ele precisa resolver e <em><strong>injetar</strong></em> a dependência:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> JdbcTarefaDao dao;
+
+      <span class="hljs-meta"><span class="hljs-meta">@Autowired</span></span>
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(JdbcTarefaDao dao)</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.dao = dao;  
+      }
+
+      <span class="hljs-comment"><span class="hljs-comment">//métodos omitidos</span></span>
+  }</code></pre><p>Para o Spring conseguir criar o <code>JdbcTarefaDao</code> vamos declarar a classe como componente.
+Aqui o Spring possui a anotação <strong><code>@Repository</code></strong> que deve ser utilizada nas classes como o DAO.
+Além disso, vamos também amarrar a conexão com <code>@Autowired</code>. Veja o código similar a classe
+<code>TarefasController</code>:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Repository</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> <span class="hljs-keyword"><span class="hljs-keyword">final</span></span> Connection connection;
+
+      <span class="hljs-meta"><span class="hljs-meta">@Autowired</span></span>
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(Connection connection)</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.connection = connection;
+      }
+
+      <span class="hljs-comment"><span class="hljs-comment">//métodos omitidos</span></span>
+  }</code></pre><p>Ao usar <code>@Autowired</code> no construtor, o Spring tenta descobrir como abrir uma conexão,
+mas claro que o Container não faz ideia com qual banco queremos nos conectar. Para
+solucionar isso o Spring oferece uma configuração de XML que define um provedor de
+conexões. No mundo JavaEE, este provedor é chamado <strong><code>DataSource</code></strong> e abstrai as
+configurações de Driver, URL, etc da aplicação.</p><p>Sabendo disso, devemos declarar um <code>DataSource</code> no XML do Spring, dentro do
+<code>spring-context.xml</code>:</p><pre><code class="hljs xml">  <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">bean</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">id</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"mysqlDataSource"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">class</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"org.apache.commons.dbcp2.BasicDataSource"</span></span></span><span class="hljs-tag">&gt;</span></span>
+      <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">property</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"driverClassName"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">value</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"com.mysql.jdbc.Driver"</span></span></span><span class="hljs-tag">/&gt;</span></span>
+      <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">property</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"url"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">value</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"jdbc:mysql://localhost/fj21"</span></span></span><span class="hljs-tag">/&gt;</span></span>
+      <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">property</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"username"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">value</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"root"</span></span></span><span class="hljs-tag">/&gt;</span></span>
+      <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">property</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"password"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">value</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"&lt;SENHA DO BANCO AQUI&gt;"</span></span></span><span class="hljs-tag">/&gt;</span></span>
+  <span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">bean</span></span></span><span class="hljs-tag">&gt;</span></span></code></pre><p>Definimos um <strong>bean</strong> no XML. Um <em>bean</em> é apenas um sinônimo para <em>componente</em>.
+Ao final, cada <em>bean</em> se torna um objeto administrado pelo Spring. Para o Spring Container,
+a <code>mysqlDataSource</code>, o <code>JdbcTarefaDao</code> e <code>TarefasController</code> são todos componentes(ou <em>beans</em>)
+que foram ligados/amarrados. Ou seja, um depende ao outro. O Spring vai criar todos e
+administrar o ciclo da vida deles.</p><p>Com a <code>mysqlDataSource</code> definida, podemos injetar ela na <code>JdbcTarefaDao</code> para recuperar a conexão JDBC:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Repository</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> <span class="hljs-keyword"><span class="hljs-keyword">final</span></span> Connection connection;
+
+      <span class="hljs-meta"><span class="hljs-meta">@Autowired</span></span>
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(DataSource dataSource)</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">try</span></span> {
+              <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.connection = dataSource.getConnection();
+          } <span class="hljs-keyword"><span class="hljs-keyword">catch</span></span> (SQLException e) {
+              <span class="hljs-keyword"><span class="hljs-keyword">throw</span></span> <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> RuntimeException(e);
+          }
+      }
+
+      <span class="hljs-comment"><span class="hljs-comment">//métodos omitidos</span></span>
+  }</code></pre><p>Pronto! Repare que no nosso projeto o <em>controlador -- depende do --&gt; dao que -- depende do --&gt; datasource</em>.
+O Spring vai primeiro criar a <code>mysqlDataSource</code>, depois o DAO e no final o controlador. Ele é o responsável
+pela criação de toda a cadeia de dependências.</p><blockquote><p><strong>Spring IoC</strong></p><p>Vimos apenas uma parte do poderoso framework Spring. A inversão de controle não só se limita a injeção
+de dependências, o Spring também sabe assumir outras preocupações comuns entre aplicações de negócios,
+como por exemplo, tratamento de transação ou segurança.</p><p>Além disso, é comum integrar outros frameworks e bibliotecas com Spring. Não é raro encontrar projetos
+que usam controladores MVC como Struts ou JSF com Spring. O Spring é muito flexível e sabe gerenciar
+qualquer componente, seja ele  simples, como uma classe do nosso projeto, ou um framework sofisticado
+como o <strong>Hibernate</strong>. O treinamento FJ-27 mostra como aproveitar o melhor do Spring.</p></blockquote><h2 id="outras-formas-de-injecao" class="subtitle">Outras formas de injeção</h2><p>Vimos como injetar uma dependência com Spring usando o construtor da classe junto com a anotação <code>@Autowired</code>.
+O construtor é um <strong>ponto de injeção</strong> que deixa claro que essa dependência é obrigatória já que não há como instanciar o objeto sem passar pelo seu construtor.</p><p>Há outros pontos de injeção como, por exemplo, o <em>atributo</em>. Podemos usar a anotação <code>@Autowired</code> diretamente
+no atributo. Assim o construtor não é mais necessário, por exemplo podemos injetar o <code>JdbcTarefaDao</code> na
+classe <code>TarefasController</code>:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-meta"><span class="hljs-meta">@Autowired</span></span>
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> JdbcTarefaDao dao;
+
+      <span class="hljs-comment"><span class="hljs-comment">//sem construtor</span></span>
+  }</code></pre><p>Outra forma é criar um método dedicado para dependência, normalmente é usado um <em>setter</em>
+aplicando a anotação em cima do método:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+      <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> JdbcTarefaDao dao;
+
+      <span class="hljs-comment"><span class="hljs-comment">//sem construtor</span></span>
+
+      <span class="hljs-meta"><span class="hljs-meta">@Autowired</span></span>
+      <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">void</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">setTarefaDao</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(JdbcTarefaDao dao)</span></span></span><span class="hljs-function"> </span></span>{
+          <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.dao = dao;
+      }
+  }</code></pre><p>Há vantagens e desvantagens de cada forma, mas em geral devemos favorecer o construtor já que isso é o
+lugar natural para a dependência. No entanto é importante conhecer os outros pontos de injeção pois alguns
+frameworks/bibliotecas exigem o construtor sem parâmetro, obrigando o desenvolvedor usar o atributo ou método.
+Como veremos no apêndice até mesmo o Spring precisa em alguns casos o construtor sem argumentos.</p><blockquote><p><strong>Para saber mais: @Inject</strong></p><p>A injeção de dependência é um tópico bastante difundido na plataforma Java. Existem vários
+container com esse poder, tanto que isso é o padrão para a maioria dos projetos Java hoje em dia.</p><p>CDI (Context e Dependency Injection, JSR-299) é a especificação que está se popularizando. O Spring só dá
+suporte limitado ao CDI mas aproveita as anotações padronizadas pela especificação JSR-330. Dessa maneira
+basta adicionar o JAR da especificação (<code>java.inject</code>) no classpath e assim podemos substituir a
+anotação <code>@Autowired</code> com <code>@Inject</code>:</p><pre><code class="hljs java"><span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+<span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+  <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> JdbcTarefaDao dao;
+
+  <span class="hljs-meta"><span class="hljs-meta">@Inject</span></span>
+  <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(JdbcTarefaDao dao)</span></span></span><span class="hljs-function"> </span></span>{
+        <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.dao = dao;
+    }
+
+    <span class="hljs-comment"><span class="hljs-comment">//métodos omitidos</span></span>
+}</code></pre></blockquote><h2 id="exercicios-inversao-de-controle-com-o-spring-container" class="subtitle">Exercícios: Inversão de controle com o Spring Container</h2><ol><li><p>Para configurar a <code>Datasource</code> é preciso copiar dois JARs.</p><ul><li><p>Primeiro, vá ao Desktop, e entre no diretório <strong>21/datasource</strong>.</p></li><li><p>Haverá dois JARs:</p></li><li><p><code>commons-dbcp2-2.7.x.jar</code></p></li><li><p><code>commons-pool2-2.8.x.jar</code>.</p></li><li><p>Copie-os (CTRL+C) e cole-os (CTRL+V) dentro de <code>workspace/fj21-tarefas/WebContent/WEB-INF/lib</code></p></li></ul></li><li><p>No arquivo <code>spring-context.xml</code> adicione a configuração da <code>Datasource</code>:</p><p>(Dica: um exemplo dessa configuração encontra-se em <code>21/datasource/spring-context-confs.xml</code>)</p><pre><code class="hljs xml"><span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">bean</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">id</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"mysqlDataSource"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">class</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"org.apache.commons.dbcp2.BasicDataSource"</span></span></span><span class="hljs-tag">&gt;</span></span>
+  <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">property</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"driverClassName"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">value</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"com.mysql.jdbc.Driver"</span></span></span><span class="hljs-tag">/&gt;</span></span>
+  <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">property</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"url"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">value</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"jdbc:mysql://localhost/fj21"</span></span></span><span class="hljs-tag">/&gt;</span></span>
+  <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">property</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"username"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">value</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"root"</span></span></span><span class="hljs-tag">/&gt;</span></span>
+  <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">property</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">name</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"password"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">value</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">""</span></span></span><span class="hljs-tag">/&gt;</span></span>
+<span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">bean</span></span></span><span class="hljs-tag">&gt;</span></span></code></pre><p>Repare que definimos as propriedades da conexão, igual a antiga classe <code>ConnectionFactory</code> e lembre-se que o usuário <strong>root</strong>  está configurado com a senha <code>""</code> (aspas vazias).</p></li><li><p>Vamos configurar a classe <code>JdbcTarefaDao</code> como componente (<em>Bean</em>) do Spring. Para isso, adicione
+a anotação <code>@Repository</code> em cima da classe:</p></li></ol><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@Repository</span></span>
+  <span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-class"> </span></span>{
+      ...
+  }</code></pre><p>Use <code>Ctrl+Shift+O</code> para importar a anotação.</p><ol start="4"><li><p>Além disso, altere o construtor da classe <code>JdbcTarefaDao</code>. Use a anotação <code>@Autowired</code>
+em cima do construtor e coloque a <code>DataSource</code> no construtor. Através dela
+obteremos uma nova conexão. A classe <code>DataSource</code> vem do package <code>javax.sql</code>.</p><p>Altere o construtor da classe <code>JdbcTarefaDao</code>:</p><pre><code class="hljs java"><span class="hljs-meta"><span class="hljs-meta">@Autowired</span></span>
+<span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">JdbcTarefaDao</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(DataSource dataSource)</span></span></span><span class="hljs-function"> </span></span>{
+  <span class="hljs-keyword"><span class="hljs-keyword">try</span></span> {
+      <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.connection = dataSource.getConnection();
+  } <span class="hljs-keyword"><span class="hljs-keyword">catch</span></span> (SQLException e) {
+      <span class="hljs-keyword"><span class="hljs-keyword">throw</span></span> <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> RuntimeException(e);
+  }
+}</code></pre><p>Ao alterar o construtor vão aparecer erros de compilação na classe <code>TarefasController</code>.</p></li><li><p>Abra a classe <code>TarefaController</code>. Nela vamos criar um atributo para a <code>JdbcTarefaDao</code>
+e gerar o construtor que recebe o DAO, novamente usando a anotação <code>@Autowired</code>:</p><pre><code class="hljs java"><span class="hljs-meta"><span class="hljs-meta">@Controller</span></span>
+<span class="hljs-keyword"><span class="hljs-keyword">public</span></span> <span class="hljs-class"><span class="hljs-keyword"><span class="hljs-class"><span class="hljs-keyword">class</span></span></span><span class="hljs-class"> </span><span class="hljs-title"><span class="hljs-class"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-class"> </span></span>{
+
+  <span class="hljs-keyword"><span class="hljs-keyword">private</span></span> <span class="hljs-keyword"><span class="hljs-keyword">final</span></span> JdbcTarefaDao dao;
+
+  <span class="hljs-meta"><span class="hljs-meta">@Autowired</span></span>
+  <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">TarefasController</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(JdbcTarefaDao dao)</span></span></span><span class="hljs-function"> </span></span>{
+      <span class="hljs-keyword"><span class="hljs-keyword">this</span></span>.dao = dao;  
+  }
+}  </code></pre></li><li><p>Altere todos os métodos que criam uma instância da classe <code>JdbcTarefaDao</code>. São justamente esse
+métodos que possuem erros de compilação.</p><p>Remova todas as linhas como:</p></li></ol><pre><code class="hljs java">  JdbcTarefaDao dao = <span class="hljs-keyword"><span class="hljs-keyword">new</span></span> JdbcTarefaDao();</code></pre><p>Por exemplo, o método para listar as tarefas fica como:</p><pre><code class="hljs java">  <span class="hljs-meta"><span class="hljs-meta">@RequestMapping</span></span><span class="hljs-meta">(</span><span class="hljs-string"><span class="hljs-meta">"listaTarefas"</span></span><span class="hljs-meta">)</span>
+  <span class="hljs-function"><span class="hljs-keyword"><span class="hljs-function"><span class="hljs-keyword">public</span></span></span><span class="hljs-function"> String </span><span class="hljs-title"><span class="hljs-function"><span class="hljs-title">lista</span></span></span><span class="hljs-params"><span class="hljs-function"><span class="hljs-params">(Model model)</span></span></span><span class="hljs-function"> </span></span>{
+      model.addAttribute(<span class="hljs-string"><span class="hljs-string">"tarefas"</span></span>, dao.lista());
+      <span class="hljs-keyword"><span class="hljs-keyword">return</span></span> <span class="hljs-string"><span class="hljs-string">"tarefa/lista"</span></span>;
+  }</code></pre><p>Arrume os outros erros de compilação, apague todas as linhas que instanciam a classe <code>JdbcTarefaDao</code>.</p><ol><li>Reinicie o Tomcat e acesse a aplicação. Tudo deve continuar funcionando.</li><li>(opcional) A classe <code>ConnectionFactory</code> ainda é necessária?</li></ol><section class="banner__container">
+<img class="banner__logo" src="./Caelum Escola de Tecnologia Cursos Online_files/alura.1616501197.svg" alt="Logo da empresa"><div class="banner__spacing backgroundAlura"><h3 class="banner__title">Agora é a melhor hora de aprender algo novo</h3><p class="banner__text">Se você gosta de estudar essa apostila aberta da Caelum, certamente vai gostar dos <strong>cursos online</strong> que lançamos na plataforma <b>Alura</b>. Você estuda a qualquer momento com a <strong>qualidade</strong> Caelum.</p>
+<a class="banner__text" href="https://www.alura.com.br/">Conheça a Alura</a></div></section><h2 id="aprimorando-o-visual-atraves-de-css" class="subtitle">Aprimorando o visual através de CSS</h2><p>Melhoramos gradativamente a nossa aplicação modificando classes e utilizando frameworks, tudo no
+lado do servidor, mas o que o usuário final enxerga é o HTML gerado que é exibido em seu navegador.
+Utilizamos algumas tags para estruturar as informações, mas nossa apresentação ainda deixa a desejar.
+Não há atrativo estético.</p><p>Para aprimorar o visual, vamos aplicar <strong>CSS</strong> nas nossas páginas. <em>CSS</em> é um acrônimo para
+<em>Cascading Style Sheets</em>, que podemos traduzir para <strong>Folhas de Estilo em Cascata</strong>. Os estilos
+definem o layout, por exemplo, a cor, o tamanho, o posicionamento e são declarados para um determinado
+elemento HTML. O <em>CSS</em> altera as propriedades visuais daquele elemento e, por cascata, todos os seus
+elementos filhos. Em geral, o HTML é usado para estruturar conteúdos da página
+(tabelas, parágrafos, div etc) e o CSS formata e define a aparência.</p><h3>Sintaxe e inclusão de CSS</h3><p>A sintaxe do CSS tem uma estrutura simples: é uma declaração de propriedades e valores separados por
+um sinal de dois pontos(:), e cada propriedade é separada por um sinal de ponto e vírgula(;),
+da seguinte maneira:</p><pre><code class="hljs css">  <span class="hljs-selector-tag"><span class="hljs-selector-tag">background-color</span></span>: <span class="hljs-selector-tag"><span class="hljs-selector-tag">yellow</span></span>;
+  <span class="hljs-selector-tag"><span class="hljs-selector-tag">color</span></span>: <span class="hljs-selector-tag"><span class="hljs-selector-tag">blue</span></span>;</code></pre><p>Como estamos declarando as propriedades visuais de um elemento em outro lugar do nosso documento,
+precisamos indicar de alguma maneira a qual elemento nos referimos. Fazemos isso utilizando
+um <strong>seletor CSS</strong>.</p><p>No exemplo a seguir, usaremos o seletor <code>p</code>, que alterará todos os parágrafos do documento:</p><pre><code class="hljs css">  <span class="hljs-selector-tag">p</span> {
+    <span class="hljs-attribute">color</span>: blue;
+    <span class="hljs-attribute">background-color</span>: yellow;
+  }</code></pre><h3>Declaração no arquivo externo</h3><p>Existem várias lugares que podemos declarar os estilos, mas o mais comum é usar um arquivo externo,
+com a extensão <code>.css</code>. Para que seja possível declarar nosso CSS em um arquivo à parte,
+precisamos indicar em nosso documento HTML uma ligação entre ele e a folha de estilo.</p><p>A indicação de uso de uma folha de estilos externa deve ser feita dentro da tag <code>&lt;head&gt;</code>
+do nosso documento HTML:</p><pre><code class="hljs xml">  <span class="hljs-meta"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span></span>
+  <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">html</span></span></span><span class="hljs-tag">&gt;</span></span>
+    <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">head</span></span></span><span class="hljs-tag">&gt;</span></span>
+      <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">link</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">type</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"text/css"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">rel</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"stylesheet"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">href</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"tarefas.css"</span></span></span><span class="hljs-tag">&gt;</span></span>
+    <span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">head</span></span></span><span class="hljs-tag">&gt;</span></span>
+    <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">body</span></span></span><span class="hljs-tag">&gt;</span></span>
+      <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span class="hljs-tag">&gt;</span></span>
+        O conteúdo desta tag será exibido em azul com fundo amarelo!
+      <span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">p</span></span></span><span class="hljs-tag">&gt;</span></span>
+
+    <span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">body</span></span></span><span class="hljs-tag">&gt;</span></span>
+  <span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">html</span></span></span><span class="hljs-tag">&gt;</span></span></code></pre><p>E dentro do arquivo <code>tarefas.css</code>:</p><pre><code class="hljs css">  <span class="hljs-selector-tag"><span class="hljs-selector-tag">p</span></span> {
+    <span class="hljs-attribute"><span class="hljs-attribute">color</span></span>: blue;
+    <span class="hljs-attribute"><span class="hljs-attribute">background-color</span></span>: yellow;
+  }</code></pre><blockquote><p><strong>Programação Front-end</strong></p><p>A preocupação com a organização do código não é exclusiva do programador back-end,
+isto é, aquele que processa seu código no servidor.</p><p>Há também o programador front-end, aquele responsável pelo código que roda no
+navegador do cliente, que também deve se preocupar com a organização de seu código,
+inclusive com a apresentação através de CSS e de um HTML bem estruturado.</p><p>A Caelum oferece os treinamentos WD-43 e WD-47 para quem quer dominar as melhores
+técnicas de desenvolvimento Web com semântica perfeita, estilos CSS poderosos e
+JavaScripts corretos e funcionais.</p></blockquote><h2 id="exercicios-opcionais-aplicando-css-nas-paginas" class="subtitle">Exercícios opcionais: Aplicando CSS nas páginas</h2><ol><li><p>No seu projeto, crie uma nova pasta <strong>css</strong> dentro da pasta <code>WebContent/resources</code>.</p></li><li><p>Vá ao Desktop e entre no diretório <strong>21/projeto-tarefas/css</strong>. Copie o arquivo <strong>tarefas.css</strong> (<code>CTRL+C</code>)
+para a pasta <code>WebContent/resources/css</code> (<code>CTRL+V</code>).</p></li><li><p>Abra a página <code>formulario-login.jsp</code> que está dentro da pasta <code>WebContent/WEB-INF/views</code>.</p></li><li><p>Na página JSP, adicione um cabeçalho(<code>&lt;head&gt;&lt;/head&gt;</code>) com o link para o arquivo CSS. Adicione o cabeçalho
+entre da tag <code>&lt;html&gt;</code> e <code>&lt;body&gt;</code>:</p></li></ol><pre><code class="hljs xml">  <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">head</span></span></span><span class="hljs-tag">&gt;</span></span>
+    <span class="hljs-tag"><span class="hljs-tag">&lt;</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">link</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">type</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"text/css"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">href</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"resources/css/tarefas.css"</span></span></span><span class="hljs-tag"> </span><span class="hljs-attr"><span class="hljs-tag"><span class="hljs-attr">rel</span></span></span><span class="hljs-tag">=</span><span class="hljs-string"><span class="hljs-tag"><span class="hljs-string">"stylesheet"</span></span></span><span class="hljs-tag"> /&gt;</span></span>
+  <span class="hljs-tag"><span class="hljs-tag">&lt;/</span><span class="hljs-name"><span class="hljs-tag"><span class="hljs-name">head</span></span></span><span class="hljs-tag">&gt;</span></span></code></pre><p>Através do link definimos o caminho para o arquivo CSS.</p><p>Cuidado: <em>Na página deve existir apenas um cabeçalho</em> (<code>&lt;head&gt;&lt;/head&gt;</code>).</p><ol start="5"><li><p>Reinicie o Tomcat e chama a página de login:</p><p><a href="http://localhost:8080/fj21-tarefas/loginForm" target="_blank" rel="noopener">http://localhost:8080/fj21-tarefas/loginForm</a></p><p>A página já deve aparecer com um visual novo.</p></li><li><p>Aplique o mesmo arquivo CSS em todas as outras páginas. Tenha cuidado para não repetir o cabeçalho, algumas
+páginas já possuem a tag <code>&lt;head&gt;</code>, outras não.</p><p>Verifique o resultado na aplicação.</p><p><img src="./Caelum Escola de Tecnologia Cursos Online_files/lista-css.png" alt="" class="cosmos-image"></p></li></ol><h2 id="deploy-do-projeto-em-outros-ambientes" class="subtitle">Deploy do projeto em outros ambientes</h2><p>Geralmente, ao desenvolvermos uma aplicação Web, possuímos um ambiente de desenvolvimento com um servidor
+que está em nossas máquinas locais. Depois que o desenvolvimento está finalizado e nossa aplicação está
+pronta para ir ao ar, precisamos enviá-la para um ambiente que costumamos chamar de <strong>ambiente de
+produção</strong>. Esse processo de disponibilizarmos nosso projeto em um determinado ambiente é o que chamamos
+de <strong>deploy</strong> (implantação).</p><p>O servidor de produção é o local no qual o projeto estará hospedado e se tornará acessível para os usuários
+finais.</p><p>Mas como fazemos para enviar nosso projeto que está em nossas máquinas locais para um servidor externo?</p><p>O processo padrão de deploy de uma aplicação web em Java é o de criar um arquivo com extensão <code>.war</code>,
+que nada mais é que um arquivo <code>zip</code> com o diretório base da aplicação sendo a raiz do zip.</p><p>No nosso exemplo, todo o conteúdo do diretório WebContent pode ser incluído em um arquivo <code>tarefas.war</code>.
+Após compactar o diretório, efetuaremos o <em>deploy</em>.</p><p>No Tomcat, basta copiar o arquivo .war no diretório <strong>TOMCAT/webapps/</strong>. Ele será descompactado pelo container
+e um novo contexto chamado <strong>tarefas</strong> estará disponível. Repare que o novo contexto gerado pelo Tomcat adota
+o mesmo nome que o seu arquivo <code>.war</code>, ou seja, nosso arquivo chamava-se <code>tarefas.war</code> e o contexto se chama
+<code>tarefas</code>.</p><p>Ao colocarmos o <code>war</code> no Tomcat, podemos acessar nossa aplicação pelo navegador através do endereço:
+<code>http://localhost:8080/tarefas/loginForm</code></p><section class="banner__container">
+<img class="banner__logo" src="./Caelum Escola de Tecnologia Cursos Online_files/logo-header-mobile.1616501197.svg" alt="Logo da empresa"><div class="banner__spacing backgroundCaelum"><h3 class="banner__title">Você pode também fazer o curso Java para Desenvolvimento Web dessa apostila na Caelum</h3><p class="banner__text">Querendo aprender ainda mais sobre? Esclarecer dúvidas dos exercícios? Ouvir explicações detalhadas com um instrutor?<br>A Caelum oferece o <strong>curso Java para Desenvolvimento Web</strong> presencial nas cidades de São Paulo, Rio de Janeiro e Brasília, além de turmas incompany.</p>
+<a class="banner__text" href="https://www.caelum.com.br/curso-java-web">Consulte as vantagens do curso <em>Java para Desenvolvimento Web</em></a></div></section><h2 id="exercicios-deploy-com-war" class="subtitle">Exercícios: Deploy com war</h2><ol><li><p>Vamos praticar criando um <code>war</code> e utilizando-o, mas, antes de começarmos, certifique-se
+de que o Tomcat esteja no ar.</p><ul><li><p>Clique com o botão direito no projeto e vá em Export
+<img src="./Caelum Escola de Tecnologia Cursos Online_files/export-war.png" alt=" {w=85%}" class="cosmos-image"></p></li><li><p>Digite na busca <strong>war file</strong></p></li><li><p>Clique no botão Browse e escolha a pasta do seu usuário e o nome <strong>tarefas.war</strong>.
+<img src="./Caelum Escola de Tecnologia Cursos Online_files/export-browse.png" alt=" {w=60%}" class="cosmos-image"></p></li><li><p>Clique em Finish</p></li></ul><p>Pronto, nosso war está criado!</p></li><li><p>Vamos instalar nosso war!</p><ul><li><p>Abra o File Browser</p></li><li><p>Clique da direita no arquivo <code>tarefas.war</code> e escolha <strong>Cut</strong>(Recortar).</p></li><li><p>Vá para o diretório <strong>apache-tomcat</strong>, Certifique-se de que seu Tomcat esteja rodando, para isso acesse o diretório <strong>bin/</strong> do tomcat via terminal e execute o script <code>startup.sh</code>.</p></li><li><p>Acesse o diretório <strong>webapps</strong>.
+<img src="./Caelum Escola de Tecnologia Cursos Online_files/webapps-dir.png" alt=" {w=65%}" class="cosmos-image"></p></li><li><p>Cole o seu arquivo aqui: (<strong>Edit</strong> -&gt; <strong>Paste</strong>). Repare que o diretório <code>tarefas</code> foi
+criado.
+<img src="./Caelum Escola de Tecnologia Cursos Online_files/war-paste.png" alt=" {w=65%}" class="cosmos-image"></p></li><li><p>Podemos acessar o projeto através da URL:
+<a href="http://localhost:8080/tarefas/loginForm" target="_blank" rel="noopener">http://localhost:8080/tarefas/loginForm</a></p></li></ul></li></ol><h2 id="discussao-em-aula-lidando-com-diferentes-nomes-de-contexto" class="subtitle">Discussão em aula: lidando com diferentes nomes de contexto</h2><nav class="workbook__chapter flex"><div>
+<a href="https://www.caelum.com.br/apostila-java-web/spring-mvc-autenticacao-e-autorizacao">
+<span class="workbook__chapter-nav">capítulo anterior</span><p class="workbook__chapter-text">Spring MVC: Autenticação e autorização</p>
+</a></div><div>
+<a href="https://www.caelum.com.br/apostila-java-web/uma-introducao-pratica-ao-jpa-com-hibernate">
+<span class="workbook__chapter-nav">próximo capitulo</span><p class="workbook__chapter-text">Uma introdução prática ao JPA com Hibernate</p>
+</a></div></nav></main><footer class="footer container"><div class="footer-container"><ul class="footer__navigation"><li class="footer--division"><a href="https://www.caelum.com.br/cursos">Cursos e Turmas</a></li><li class="footer--division"><a href="https://www.caelum.com.br/todos-os-cursos">Catálogo de Cursos</a></li><li class="footer--division"><a href="https://www.caelum.com.br/apostilas">Apostilas</a></li><li class="footer--division"><a href="https://www.caelum.com.br/empresas">Para Empresas</a></li><li class="footer--division"><a href="https://www.caelum.com.br/sobre">Sobre Nós</a></li><li class="footer--division"><a href="https://www.caelum.com.br/instrutores">Equipe</a></li><li class="footer--division"><a href="https://www.caelum.com.br/contato">Contato</a></li><li class="footer--no-border"><form class="footer-newsletter" action="https://www.rdstation.com.br/api/1.2/conversions" method="post"><input type="hidden" name="token_rdstation" value="4b7bbfbbbe5c7e29f1c12ecb3b59096b">
+<input type="hidden" name="identificador" value="caelum-formulario-receber-newsletter-novo-site">
+<input type="hidden" name="_is" value="6">
+<input type="hidden" name="c_utmz" value="">
+<input type="hidden" name="traffic_source" value="">
+<input type="hidden" name="client_id" value="">
+<input type="hidden" name="redirect_to" value="https://caelum.com.br/newsletter">
+<input type="hidden" name="_doe" value="">
+<input type="hidden" name="thankyou_message" value="Agradecemos seu interesse! Você vai receber nossas newsletters a partir de agora :)" disabled="">
+<label class="footer__newsletter--label" for="newsletter-email">Receba novidades</label><div class="footer__container">
+<input class="footer__newsletter--input" id="newsletter-email" type="email" name="email" placeholder="exemplo@email.com" required="">
+<button class="footer__newsletter--submit" type="submit">Ok</button></div></form></li><li><ul class="footer__social-media"><li><a href="https://www.instagram.com/caelum.tecnologia/" target="_blank" title="Instagram" class="footer__icon footer__icon--instagram"></a></li><li><a href="https://twitter.com/caelum" target="_blank" title="Twitter" class="footer__icon footer__icon--twitter"></a></li><li><a href="https://pt.linkedin.com/school/caelum/" target="_blank" title="Linkedin" class="footer__icon footer__icon--linkedin"></a></li></ul></li></ul></div><p class="footer__copyright">Caelum. Escola de Tecnologia. Cursos online ao vivo.</p></footer> <script src="./Caelum Escola de Tecnologia Cursos Online_files/menu.1616501197.js.download"></script> <script src="./Caelum Escola de Tecnologia Cursos Online_files/apostila-aberta.1616501197.js.download"></script>  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    // account normal é 'UA-270161-1' e account de funcionarios é 'UA-270161-16'
+    ga('create', 'UA-270161-1' + (document.cookie && document.cookie.indexOf('caelum-funcionario') != -1 ? '6' : ''), 'auto');
+    ga('send', 'pageview');</script>  <script>setTimeout(function () {
+            var div = document.createElement('div');
+            div.innerHTML = '<iframe src="//4026389.fls.doubleclick.net/activityi;src=4026389;type=conve651;cat=;ord=' + (Math.random() * 10000000000000) + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>';
+            document.body.appendChild(div);
+        }, 100);</script> <noscript>
+<iframe
+src="//4026389.fls.doubleclick.net/activityi;src=4026389;type=conve651;cat=;ord=1?" width="1" height="1"
+frameborder="0" style="display:none"></iframe>
+</noscript><style>[name="google_conversion_frame"] {
+            display: none
+        }</style> <script>/*  */
+        var google_conversion_id = 995678627;
+        var google_conversion_label = "DYcgCO3T_gMQo7Pj2gM";
+        var google_custom_params = window.google_tag_params;
+        var google_remarketing_only = true;
+        /*  */</script> <script src="./Caelum Escola de Tecnologia Cursos Online_files/f.txt"></script><script src="./Caelum Escola de Tecnologia Cursos Online_files/f(1).txt"></script> <noscript><div
+style="display:inline;">
+<img
+height="1" width="1" style="border-style:none;" alt=""
+src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/995678627/?value=0&amp;label=DYcgCO3T_gMQo7Pj2gM&amp;guid=ON&amp;script=0"/></div>
+</noscript> <script src="./Caelum Escola de Tecnologia Cursos Online_files/lead-tracking.min.js.download"></script> <script>LeadTracking.init({token: '4b7bbfbbbe5c7e29f1c12ecb3b59096b'});</script>  <script>(function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:158595,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');</script> <script src="./Caelum Escola de Tecnologia Cursos Online_files/20bd5d95-759f-4313-ad3e-1663fd4de6c0-loader.js.download" type="text/javascript" async=""></script>  <script>!function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '2143375715701577');
+        fbq('track', 'PageView');</script> <noscript>
+<img
+height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2143375715701577&ev=PageView&noscript=1"/>
+</noscript><div><iframe src="./Caelum Escola de Tecnologia Cursos Online_files/activityi.html" width="1" height="1" frameborder="0" style="display:none"></iframe></div><script type="text/javascript" src="./Caelum Escola de Tecnologia Cursos Online_files/lead-tracking.min.js.download"></script><script type="text/javascript" src="./Caelum Escola de Tecnologia Cursos Online_files/traffic-source-cookie.min.js.download"></script><iframe style="width: 1px; height: 1px; position: absolute; top: -100px;" id="rd_tmgr" src="./Caelum Escola de Tecnologia Cursos Online_files/saved_resource.html"></iframe><iframe name="_hjRemoteVarsFrame" title="_hjRemoteVarsFrame" id="_hjRemoteVarsFrame" src="./Caelum Escola de Tecnologia Cursos Online_files/box-25a418976ea02a6f393fbbe77cec94bb.html" style="display: none !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important;"></iframe><script type="text/javascript" src="./Caelum Escola de Tecnologia Cursos Online_files/rdstation-popup.min.js.download"></script><script type="text/javascript" src="./Caelum Escola de Tecnologia Cursos Online_files/rd-js-integration.min.js.download"></script></body></html>
