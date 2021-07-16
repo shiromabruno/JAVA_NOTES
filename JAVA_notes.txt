@@ -999,7 +999,9 @@ sm.setSentDate(new Date(System.currentTimeMillis())); ---> pega o time do servid
 
 Envio de email
 
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.SimpleMailMessage; 
+SimpleMailMessage --> monta corpo do email, assunto, To e From. [Lembra um pouco do MimeMessageHelper (HTML email)]
+
 Modelo Conceitual
 
 @Override
@@ -1021,7 +1023,7 @@ Modelo Conceitual
 Envio de Email PROD
 #Usado pelo MailSender
 @Autowired
-	private MailSender mailSender;
+	private MailSender mailSender;  --> pega as configs abaixo e de fato envia
 
 spring.mail.host=smtp.gmail.com
 spring.mail.username=shiromayuji
@@ -1032,6 +1034,47 @@ spring.mail.properties.mail.smtp.socketFactory.class = javax.net.ssl.SSLSocketFa
 spring.mail.properties.mail.smtp.socketFactory.fallback = false
 spring.mail.properties.mail.smtp.starttls.enable = true
 spring.mail.properties.mail.smtp.ssl.enable = true
+
+import javax.mail.internet.MimeMessage;
+MimeMessage  --> envio de email HTML. Quem monta template eh o Thymeleaf ?
+
+Para transformar de um objeto para um MimeMessage, precisa do JavaMailSender
+import org.springframework.mail.javamail.JavaMailSender;
+MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+Para atribuir valores ao MimeMessage precisa do MimeMessageHelper. Lembra um pouco do SimpleMailMessage (Email normal String sem HTML)
+import org.springframework.mail.javamail.MimeMessageHelper;
+MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);
+MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+		MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true);
+		mmh.setTo(obj.getCliente().getEmail());
+		mmh.setFrom(sender);
+		mmh.setSubject(sender);
+		mmh.setSubject("Pedido confirmado! Codigo: " + obj.getId());
+		mmh.setSentDate(new Date(System.currentTimeMillis()));
+		mmh.setText(htmlFromTemplatePedido(obj), true); // TRUE indica que o conteudo eh HTML
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+Thymeleaf - Template html que escreve HTML e coloca os elementos que serao preenchidos com os Dados. Igual Angular ou Blade (PHP)
+Monta um String povoando as tags
+
+<dependency>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+
+Criar o template Thymeleaf para o email (código no final deste documento). Criar o arquivo em:
+resources/templates/email/confirmacaoPedido.html
+
+Precisa do import org.thymeleaf.context.Context;
+Contexto eh necessario para acessar o template HTML e enviar dados pra la
+context.setVariable("pedido", obj); // esse "pedido" a esquerda corresponde com apelido la no PEDIDO.id, PEDIDO.cliente.nome, PEDIDO.pagamento.estado...
+
+Para processar esse Template pra retornar o HTML em forma de String
+import org.thymeleaf.TemplateEngine;
+templateEngine.process("email/confirmacaoPedido", context); // "email/confirmacaoPedido" --> associa com confirmacaoPedido.html que esta no RESOURCE. Nao precisa colocar o .html e nem falar q esta dentro do src/main/resource/ --> Ja pega de la por padrao. Retorna um string
 
 -------------------------------------------------------------------------------------------------------------------
 
