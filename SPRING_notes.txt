@@ -511,10 +511,13 @@ It means that the collection is not a collection of entities, but a collection o
 It also means that the elements are completely owned by the containing entities: they're modified when the entity is modified, deleted when the entity is deleted, etc. They can't have their own lifecycle.
 Exemplo: Classe Cliente que tem telefone
 @ElementCollection
-	@CollectionTable(name="Telefone")
+	@CollectionTable(name="Telefone") //armazena os telefones de TODOS. Exemplo: Codigo_cliente 1 tem Telefone 123123123
 	private Set<String> telefones = new HashSet<>();
 @CollectionTable cria uma tabela separada. Usado pra criar uma entidade fraca, embora nao seja entidade
 The ElementCollection values are always stored in a separate table. The table is defined through the @CollectionTable annotation or the <collection-table> element. The CollectionTable defines the table's name and @JoinColumn or @JoinColumns if a composite primary key.
+
+@ElementCollection(fetch=FetchType.EAGER)
+Garante que for buscar os CLientes no Banco dedados, vai buscar os PERFIS tambem. EAGER garanta que ambos sejam buscados juntos
 
 @Embeddable
 Esse tipo de classe funciona como campos dentro de uma Entidade no JPA, isso significa entre outras coisas, que uma classe Embeddable só poderá ser salva no banco de dados, estando dentro de uma Entidade (Entity class). Exemplo:

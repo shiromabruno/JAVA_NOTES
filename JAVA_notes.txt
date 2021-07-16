@@ -108,6 +108,28 @@ ArrayList can be instantiated.
 ArrayList class is used to create a dynamic array that contains objects.
 ArrayList creates an array of objects where the array can grow dynamically.
 
+Funcoes de Collections
+
+List<Pessoa> pessoas = populaPessoas(); //Cria uma lista de Pessoa
+pessoas.stream().forEach(pessoa -> System.out.println(pessoa.getNome()));
+
+List<Pessoa> pessoas = popularPessoas(); //Cria uma lista de Pessoa
+Stream<Pessoa> stream = pessoas.stream().filter(pessoa -> pessoa.getNacionalidade().equals("Brasil"));
+
+//media de idades de todas as pessoas q nasceram no Brasil e estao nessa collection
+List<Pessoa> pessoas = new Pessoa().populaPessoas();
+double media = pessoas.stream().
+filter(pessoa -> pessoa.getNacionalidade().equals("Brasil")).
+mapToInt(pessoa -> pessoa.getIdade()).
+average().getAsDouble();
+
+public Set<Perfil> getPerfis(){ //precisa converter o Numerico para o Perfil equivalente (resgata o INTEGER da tabela)
+		//pra cada X [instancia de Perfil] fazer um mapeamento trocando Integer pelo ROLE_bla. Em seguida transforma em SET (Set<Integer>)
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());   //private Set<Integer> perfis = new HashSet<>();
+	}
+
+cli1.getTelefones().addAll(Arrays.asList("27334421", "927334421"));
+
 -------------------------------------------------------------------------------------------------------------------
 
 Lambda
@@ -1099,6 +1121,12 @@ Precisa ter a classe config
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{ para definir rotas livres, acesso aos endpoints, endpoints bloqueados, acessos from multiplas fontes, habilitar/desabilitar csrf [ataques STATELESS via sessao armazenando autenticador], etc
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+Hash Cript da senha password
+@Autowired
+	private BCryptPasswordEncoder pe;
+pe.encode(objDto.getSenha())
 
 -------------------------------------------------------------------------------------------------------------------
 Para mais infos, ver MAVEN_NOTES.txt
