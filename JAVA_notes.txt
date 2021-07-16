@@ -1084,3 +1084,63 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //Tipo static pra nao ter que criar para todo email. So um ja eh o suficiente
 	private static final Logger LOG = LoggerFactory.getLogger(MockEmailService.class) --> LOG dessa classe MockEmailService
+
+-------------------------------------------------------------------------------------------------------------------
+
+JWT - json web token
+manter infos de autorizacao de usuarios por meio de um token que eh trafegado no cabecalho da requisicao. Armaezena usuario e tempo de expiracao do token de uma forma criptografada e assinada pelo backend. Entao outra pessoa nao consegue gerar outro token pois eh assinado
+2 dependencias: artifactId spring-boot-starter-security e jjwt
+
+SPRING-BOOT-STARTER-SECURITY - Security [Mais info e exemplo MAVEN_NOTES]
+
+Ao colocar a dependencia spring-boot-starter-security ja protege os endpoints (ao rodar Postmand, dara 401 not authorized)
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+Precisa ter a classe config
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter{ para definir rotas livres, acesso aos endpoints, endpoints bloqueados, acessos from multiplas fontes, habilitar/desabilitar csrf [ataques STATELESS via sessao armazenando autenticador], etc
+
+-------------------------------------------------------------------------------------------------------------------
+Para mais infos, ver MAVEN_NOTES.txt
+
+Hibernate is the implementation of JPA. It is the most popular ORM framework, while JPA is an API that defines the specification. Hibernate understands the mapping that we add between objects and tables. It ensures that data is retrieved/ stored from the database based on the mapping. It also provides additional features on the top of the JPA.
+
+Spring Data is a high-level Spring Source project. Its purpose is to unify and easy access to the different kinds of persistence stores, both relational database systems, and NoSQL data stores. That's why the Java Persistent API (JPA) specification and Spring Data JPA are extremely popular
+Spring Data JPA handles most of the complexity of JDBC-based (Java Database Connectivity) database access and ORM (Object Relational Mapping). It reduces the boilerplate code required by JPA. It makes the implementation of your persistence layer easier and faster.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Jackson tem o MASHALL e UNMARSHALL
+
+Possui tambem validacao e @Types
+@Bean
+	public Jackson2ObjectMapperBuilder objectMapperBuilder() {
+		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder() {
+			public void configure(ObjectMapper objectMapper) {
+				objectMapper.registerSubtypes(PagamentoComCartao.class);
+				objectMapper.registerSubtypes(PagamentoComBoleto.class);
+				super.configure(objectMapper);
+			}
+		};
+		return builder;
+	}
+
+-------------------------------------------------------------------------------------------------------------------
+
+H2 e MYSQL Configs ver no Maven Notes
+
+application properties TEST:
+
+server.port=${port:8081}
+spring.datasource.url=jdbc:h2:mem:testdb 
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.show-sql=true 
+spring.jpa.properties.hibernate.format_sql=true 
+
+
+application properties DEV:
+spring.datasource.url=jdbc:mysql://localhost:3306/curso_spring?serverTimezone=UTC
+#spring.datasource.url=jdbc:mysql://b107017d8b964b:cc1f0b1a@us-cdbr-east-04.cleardb.com/heroku_c5b6f3779661a9c?reconnect=true
+spring.datasource.username=root
+spring.datasource.password=

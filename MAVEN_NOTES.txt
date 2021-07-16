@@ -1,0 +1,226 @@
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+If we want to develop a web application, we need to add the following dependency in pom.xml.
+Starter of Spring web uses Spring MVC, REST and Tomcat as a default embedded server. Spring Boot also supports another two embedded servers: Jetty and Undertow
+
+-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=
+
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+It contains the majority of elements required for our tests.
+
+In the above dependency, one thing to be noticed that it includes the scope of test <scope>test</scope>. It means when the application is bundled and packaged for deployment, any dependency that is declared with the test scopes is ignored. The test scope dependencies are only available when running in the development and Maven test modes.
+
+When we create a simple Spring Boot application, by default, it contains the test dependency in the pom.xml file and ApplicationNameTest.java file under in the folder src/test/java.
+Implements two annotation by default: @SpringBootTest, and @Test.
+
+-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=
+
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+Spring Data is a high-level Spring Source project. Its purpose is to unify and easy access to the different kinds of persistence stores, both relational database systems, and NoSQL data stores. That's why the Java Persistent API (JPA) specification and Spring Data JPA are extremely popular
+Spring Data JPA handles most of the complexity of JDBC-based (Java Database Connectivity) database access and ORM (Object Relational Mapping). It reduces the boilerplate code required by JPA. It makes the implementation of your persistence layer easier and faster.
+
+public interface EmployeeRepository extends CrudRepository<Employee, Long>   
+{  
+Employee findByName(String name);  
+}  
+In the above example, we extend the CrudRepository that uses two generics: Employee and Long. The Employee is the entity that is to be managed, and Long is the data type of primary key. Spring internally generates a JPQL (Java Persistence Query Language) query based on the method name
+
+Spring Data JPA provides three repositories are as follows: CrudRepository(create, read, update, and delete It contains method like findOne(), findAll()...)
+PagingAndSortingRepository: It extends the CrudRepository and adds the findAll methods. It allows us to sort and retrieve the data in a paginated way.
+JpaRepository: It is a JPA specific repository It is defined in Spring Data Jpa. It extends the both repository CrudRepository and PagingAndSortingRepository. It adds the JPA-specific methods, like flush() to trigger a flush on the persistence context.
+
+<dependency>  
+<groupId>org.springframework.data</groupId>  
+<artifactId>spring-data-jpa</artifactId>  
+<version>2.2.3.RELEASE</version>  
+</dependency>  
+
+Spring Boot provides spring-boot-starter-data-jpa dependency to connect Spring application with relational database efficiently. The spring-boot-starter-data-jpa internally uses the spring-boot-jpa dependency (since Spring Boot version 1.5.3).
+
+Hibernate is the implementation of JPA. It is the most popular ORM framework, while JPA is an API that defines the specification. Hibernate understands the mapping that we add between objects and tables. It ensures that data is retrieved/ stored from the database based on the mapping. It also provides additional features on the top of the JPA.
+
+-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=
+
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+
+Spring Boot DevTools pick up the changes and restart the application.
+Property Defaults, Automatic Restart, LiveReload , Remote Debug Tunneling , Remote Update and Restart
+
+Property Defaults: Spring Boot provides templating technology Thymeleaf that contains the property spring.thymeleaf.cache. It disables the caching and allows us to update pages without the need of restarting the application.
+
+Automatic Restart: Auto-restart means reloading of Java classes and configure it at the server-side. After the server-side changes, it deployed dynamically, server restarts happen, and load the modified code. It is mostly used in microservice-based applications. Spring Boot uses two types of ClassLoaders:
+The classes that do not change (third-Jars) are loaded in the base ClassLoader.
+The classes that we are actively developing are loaded in the restart ClassLoader.
+When the application restarts, the restart ClassLoader is thrown away, and a new one is populated. Therefore, the base ClassLoader is always available and populated.
+We can disable the auto-restart of a server by using the property spring.devtools.restart.enabled to false.
+
+LiveReload: The Spring Boot DevTools module includes an embedded server called LiveReload. It allows the application to automictically trigger a browser refresh whenever we make changes in the resources. It is also known as auto-refresh. We can disable the LiveReload by setting the property spring.devtools.livereload.enabled to false.
+The LiveReload works on the following path:
+/META-INF/maven
+/META-INF/resources
+/resources
+/static
+/public
+/templates
+
+-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=
+
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+MailSender interface: the top-level interface that provides basic functionality for sending simple emails
+JavaMailSender interface: the subinterface of the above MailSender. It supports MIME messages and is mostly used in conjunction with the MimeMessageHelper class for the creation of a MimeMessage. It's recommended to use the MimeMessagePreparator mechanism with this interface.
+JavaMailSenderImpl class provides an implementation of the JavaMailSender interface. It supports the MimeMessage and SimpleMailMessage.
+SimpleMailMessage class: used to create a simple mail message including the from, to, cc, subject and text fields
+MimeMessagePreparator interface provides a callback interface for the preparation of MIME messages.
+MimeMessageHelper class: helper class for the creation of MIME messages. It offers support for images, typical mail attachments and text content in an HTML layout.
+
+Para mais info ver JAVA_NOTES
+
+-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=
+PARA MAIS INFO Java_notes
+
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+Thymeleaf is a Java-based library used to create a web application.
+It provides a good support for serving a XHTML/HTML5 in web applications
+
+src/main/resources tem 2 subpastas STATIC (que tem pasta css dentro [ que por sua vez tem styles.css dentro]) e templates (que por sua vez tem Index.html)
+Poderia ter uma terceira subpasta chamada email, que teria um arquivo .html contendo email que seria enviado e formatado via HTML
+
+@Controller
+public class WebController {
+   @RequestMapping(value = "/index")
+   public String index() {
+      return "index";
+   }
+}
+
+h4 {
+   color: red;
+}
+The code for index.html file is given below −
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset = "ISO-8859-1" />
+      <link href = "css/styles.css" rel = "stylesheet"/>
+      <title>Spring Boot Application</title>
+   </head>
+   <body>
+      <h4>Welcome to Thymeleaf Spring Boot web application</h4>
+   </body>
+</html>
+
+-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=
+
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+Framework do projeto Spring que possui um sistema de autenticação e autorização de alto nível e altamente customizável para aplicações Java.
+So por incluir a dependencia, ja bloqueia os endpoints!
+MAIS INFOS JAVA NOTES
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    public static final String ZUL_FILES = "/zkau/web/**/*.zul";
+    public static final String[] ZK_RESOURCES = {"/zkau/web/**/js/**", "/zkau/web/**/zul/css/**", "/zkau/web/**/img/**"};
+    // allow desktop cleanup after logout or when reloading login page
+    public static final String REMOVE_DESKTOP_REGEX = "/zkau\\?dtid=.*&cmd_0=rmDesktop&.*";
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.authorizeRequests()
+            .antMatchers(ZUL_FILES).denyAll() // block direct access to zul files
+            .antMatchers(HttpMethod.GET, ZK_RESOURCES).permitAll() // allow zk resources
+            .regexMatchers(HttpMethod.GET, REMOVE_DESKTOP_REGEX).permitAll() // allow desktop cleanup
+            .requestMatchers(req -> "rmDesktop".equals(req.getParameter("cmd_0"))).permitAll() // allow desktop cleanup from ZATS
+            .mvcMatchers("/","/login","/logout").permitAll()
+            .mvcMatchers("/secure/**").hasRole("USER")
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/login").defaultSuccessUrl("/secure/main")
+            .and()
+            .logout().logoutUrl("/logout").logoutSuccessUrl("/");
+    }
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        UserDetails user =
+                User.withDefaultPasswordEncoder()
+                        .username("user")
+                        .password("password")
+                        .roles("USER")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user);
+    }
+}
+
+@EnableWebSecurity
+@Configuration
+public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
+
+}
+
+-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=
+
+<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+Permite acesso ao H2 em 
+http://localhost:8080/h2-console/
+
+application properties:
+
+server.port=${port:8081}
+spring.datasource.url=jdbc:h2:mem:testdb 
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.show-sql=true 
+spring.jpa.properties.hibernate.format_sql=true 
+
+
+-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=-=--==-=-=
+
+<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+application properties:
+spring.datasource.url=jdbc:mysql://localhost:3306/curso_spring?serverTimezone=UTC
+#spring.datasource.url=jdbc:mysql://b107017d8b964b:cc1f0b1a@us-cdbr-east-04.cleardb.com/heroku_c5b6f3779661a9c?reconnect=true
+spring.datasource.username=root
+spring.datasource.password=
