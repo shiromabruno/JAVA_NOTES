@@ -1,0 +1,72 @@
+A utilidade destes métodos são inúmeras. Para ilustrar melhor o uso da serialização vamos imaginar algumas situações comuns:
+
+Vamos pensar em um sistema que exija um cadastro com muitos campos (mais de 40), com informações detalhadas. Imagine um sistema que cadastra projetos para construção de casas em massa, onde cada projeto exige esse montante de informações. O usuário começa a cadastrar as informações, mas como são muitas ele pode optar por salvar o estado atual e continuar somente amanhã.
+
+Como você faria isso ? Uma opção a ser pensada é salvar o cadastro como está no banco de dados. Mas isso pode acarretar em vários problemas: Um cadastro incompleto pode ocasionar inconsistências no sistema por diversas formas que não convém tratar aqui. Além da remota possibilidade de faltar energia ou o computador travar e todo cadastro não salvo ser perdido.
+
+Enfim, uma solução provável para isso é aplicar a serialização. Podemos, por exemplo, salvar o cadastro como um objeto serializado na rede (um local seguro no servidor), e amanhã quando o usuário abrir novamente a tela, todos os seus dados estarão “magicamente” preenchidos.
+
+Imagine a aplicabilidade da serialização em documentos de texto, em editores de texto que possuem este recurso (a maioria possui). Você está digitando um texto super importante com informações que de forma alguma podem ser perdidas. Você, por falta de atenção, esquece de salvar o documento e o computador trava. Você deve pensar: E agora ? Perdi todo o conteúdo ? Magicamente quando você abre o editor de texto novamente ele avisa que há documentos que podem ser recarregados, e magicamente o seu documento (mesmo sem ser salvo) é recarregado. A solução ? Serialização de Objetos. Salvamos o estado do documento de 5 em 5 minutos (apenas um exemplo, não que os editores atuais sejam exatamente assim) e mesmo que ocorra um sinistro, podemos recuperar o documento a 5 minutos atrás.
+
+Exemplo no examples_write_read.txt
+
+
+-=-=-=-=-=-=
+
+Temos um problema grave, que até então nem imaginava que isso era possível. Vamos primeiro a uma pergunta simples: Porque colocamos os atributos de um Bean como privados e definimos getters e setters para acessá-lo ? A resposte é simples: Para evitar que seja feito um acesso direto ao atributo, assim podemos tratar a forma que queremos mostrar esse atributo. Imagine um Bean chamado CartaoDeCredito onde temos informações sigilosas como número do cartão e senha, no método get você pode definir wildcards (*) para não retornar o número do cartão por completo e muito menos a senha.
+
+Enfim, o que isso tem a ver com serialização ? Como a serialização é uma sequência de bytes com informações puras, está na cara que é possível ler qualquer informações do objeto serializado, independente se ele é privado ou não. Se alguém simplesmente realizar um dump do conteúdo para o console, já consegue visualizar toda a informação contida no bean, sem nenhuma segurança.
+
+Para evitar isso o ideal é implementar um método writeObject e readObject no Bean que desejamos serializar com segurança, assim podemos implementar algoritmos para serializar o valor e deserializar, como uma chave de segurança. Lembre-se que a serialização não serializa métodos, por isso o writeObject e readObject não será mostrado, apenas os valores de atributos. O Exemplo mostrado na listagem abaixo exemplifica o uso desses “ocultadores” de informações.
+
+Exemplo abaixo:
+
+public class Person
+implements java.io.Serializable
+{
+public Person(String fn, String ln, int a)
+{
+    this.firstName = fn; this.lastName = ln; this.age = a;
+}
+
+public String getFirstName() { return firstName; }
+public String getLastName() { return lastName; }
+public int getAge() { return age; }
+public Person getSpouse() { return spouse; }
+
+public void setFirstName(String value) { firstName = value; }
+public void setLastName(String value) { lastName = value; }
+public void setAge(int value) { age = value; }
+public void setSpouse(Person value) { spouse = value; }
+
+private void writeObject(java.io.ObjectOutputStream stream)
+    throws java.io.IOException
+{
+
+    age = age << 2;
+    stream.defaultWriteObject();
+}
+
+private void readObject(java.io.ObjectInputStream stream)
+    throws java.io.IOException, ClassNotFoundException
+{
+    stream.defaultReadObject();
+
+
+    age = age << 2;
+}
+
+public String toString()
+{
+    return "[Person: firstName=" + firstName +
+        " lastName=" + lastName +
+        " age=" + age +
+        " spouse=" + (spouse!=null ? spouse.getFirstName() : "[null]") +
+        "]";
+}
+
+private String firstName;
+private String lastName;
+private int age;
+private Person spouse;
+}

@@ -125,7 +125,7 @@ average().getAsDouble();
 
 public Set<Perfil> getPerfis(){ //precisa converter o Numerico para o Perfil equivalente (resgata o INTEGER da tabela)
 		//pra cada X [instancia de Perfil] fazer um mapeamento trocando Integer pelo ROLE_bla. Em seguida transforma em SET (Set<Integer>)
-		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());   //private Set<Integer> perfis = new HashSet<>();
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());   //private Set<Integer> perfis = new HashSet<>(); [import java.util.stream.Collectors;]
 	}
 
 cli1.getTelefones().addAll(Arrays.asList("27334421", "927334421"));
@@ -1172,3 +1172,29 @@ spring.datasource.url=jdbc:mysql://localhost:3306/curso_spring?serverTimezone=UT
 #spring.datasource.url=jdbc:mysql://b107017d8b964b:cc1f0b1a@us-cdbr-east-04.cleardb.com/heroku_c5b6f3779661a9c?reconnect=true
 spring.datasource.username=root
 spring.datasource.password=
+
+-------------------------------------------------------------------------------------------------------------------
+
+Serialization serialization 
+
+A serialização em Java é o processo no qual a instância de um objeto é transformada em uma sequência de bytes e é útil quando precisamos enviar objetos pela rede, salvar no disco, ou comunicar de uma JVM com outra. Isso porque o estado atual do objeto é “congelado” e na outra “ponta” nós podemos “descongelar” este objeto sem perder nenhuma informação.
+
+Para habilitar a serialização de terminada classe você deve explicitamente implementar a interface Serializable. Esta interface é apenas de marcação, pois não tem nenhum método a ser implementado, serve apenas para que a JVM saiba que aquela determinada Classe está hábil para ser serializada.
+
+Caso você não deseje serializar algum atributo em específico de determinado objeto, basta marcá-lo como transient, assim o objeto serializado não conterá a informação referente ao atributo transient.
+public class Address implements Serializable{
+
+   private transient String street;
+   String country;
+... 
+O que você pode perceber acima é que o atributo street não será serializado, em outras palavras, nosso objeto serializado não irá conter a rua (street), apenas o pais (country).
+
+A classe WriteObject é responsável por serializar determinada instancia, por outro lado a ReadObject faz o processo inverso, a deserialização. (pasta serialization e desserialization)
+
+private static final long serialVersionUID = 1L;
+
+The serialization runtime associates with each serializable class a version number, called a serialVersionUID, which is used during deserialization to verify that the sender and receiver of a serialized object have loaded classes for that object that are compatible with respect to serialization. If the receiver has loaded a class for the object that has a different serialVersionUID than that of the corresponding sender's class, then deserialization will result in an InvalidClassException. A serializable class can declare its own serialVersionUID explicitly by declaring a field named "serialVersionUID" that must be static, final, and of type long:
+
+The point of serialVersionUID is to give the programmer control over which versions of a class are considered incompatible in regard to serialization. As long as the serialVersionUID stays the same, the serialization mechanism will make a best effort to translate serialized instances, which may not be what you want. If you make a semantic change that renders older versions incompatible, you can change the serialVersionUID to make deserializing older instances fail. --> 
+
+-------------------------------------------------------------------------------------------------------------------
