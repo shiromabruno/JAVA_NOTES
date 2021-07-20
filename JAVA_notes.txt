@@ -912,7 +912,7 @@ Endereco endereco =
 
 -------------------------------------------------------------------------------------------------------------------
 
-ModelMapper
+ModelMapper model mapper
 
 public class Pedido {
 	private Endereco destino;
@@ -948,6 +948,8 @@ mapper.addMappings(new PropertyMap<Pedido, PedidoDto>() {
    map().setCliente(nome);
  }}
 );
+
+Outro exemplo: CredenciaisDTO creds = new ObjectMapper().readValue(req.getInputStream(), CredenciaisDTO.class);
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -1128,6 +1130,12 @@ Hash Cript da senha password
 	private BCryptPasswordEncoder pe;
 pe.encode(objDto.getSenha())
 
+JWTAuthenticationFilter --> faz autenticacao do usuario com senha, se OK, gera Token no Header
+UsernamePasswordAuthenticationFilter --> com o UsernamePasswordAuthenticationFilter, o Spring sabe que ele tera que interceptar a requisicao de LOGIN /login
+
+localhost/login --> padrao do spring security para autenticacao
+
+VER MODELO CONCEITUAL_ pacote SECURITY UTIL
 -------------------------------------------------------------------------------------------------------------------
 Para mais infos, ver MAVEN_NOTES.txt
 
