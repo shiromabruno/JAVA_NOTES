@@ -1,4 +1,4 @@
-- JAVA_HOME: must point to installation directory of JDK.
+- JAVA_HOME: must point to installation directory of JDK.g
 - JRE_HOME: must point to installation directory of JRE.
 - CLASSPATH: contains libraries path which JVM will look for.
 - PATH: normal environment variable on Windows. (tem varias coisas, umas delas eh o caminho do C:\Program Files\Java\jdk1.8.0_211\bin para rodar JAVAC no cmd)
@@ -533,7 +533,7 @@ Animal animal = new Cat();
 
 -------------------------------------------------------------------------------------------------------------------
 
-Types tipos of Keywords in Java Tipos de Keywords
+Types tipos of Keywords in Java Tipos de Keywords. Tipagem
 
 Static, Final, Abstract, Concrete, Singleton, POJO, Inner
 
@@ -1215,7 +1215,10 @@ StringUtils.rightPad(String str, int size)
 String rightpadded = StringUtils.rightPad("7", 7, "#"); ---> 7######
 
 String padded = String.format("%-20s", str);
-In a formatter, % introduces a format sequence. The - means that the string will be left-justified (spaces will be added at the end of the string, vai colocar espacos no lado direito deixando a string no canto esquerdo). The 20 means the resulting string will be 20 characters long. The s is the character string format code, and ends the format sequence.
+In a formatter, % introduces a format sequence. 
+The - means that the string will be left-justified (spaces will be added at the end of the string, vai colocar espacos no lado direito deixando a string no canto esquerdo. Se for 0 eh direito). 
+The 20 means the resulting string will be 20 characters long. 
+The s is the character string format code, and ends the format sequence.
 
 //add 3 leading zeros in this number
 	int number = 7;
@@ -1233,5 +1236,49 @@ sb.append(num4);
 sb.append("-");
 sb.append(num5);
 
+-------------------------------------------------------------------------------------------------------------------
+
+Concate
+
 
 System.out.println("Your phone number is: " + sb.toString());
+
+public static void main(String... args) {
+        long initialTime = System.currentTimeMillis();
+
+        String s = "a";
+        StringBuilder strBuilder = new StringBuilder(s);
+        for (int i = 0; i < 100000; i++) {
+            strBuilder.append("a");
+        }
+
+        System.out.println("Total time: " + (System.currentTimeMillis() - initialTime));
+    }
+
+OOOUU
+
+public static void main(String... args) {
+        long initialTime = System.currentTimeMillis();
+
+        String s = "a";
+
+        for (int i = 0; i < 100000; i++) {
+            s += "a";
+        }
+
+        System.out.println("Total time: " + (System.currentTimeMillis() - initialTime));
+}
+
+OOUU
+
+const str1 = 'Hello';
+const str2 = 'World';
+
+console.log(str1.concat(' ', str2));
+// expected output: "Hello World"
+
+console.log(str2.concat(', ', str1));
+// expected output: "World, Hello"
+
+
+-------------------------------------------------------------------------------------------------------------------
