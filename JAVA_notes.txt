@@ -1206,6 +1206,9 @@ The serialization runtime associates with each serializable class a version numb
 The point of serialVersionUID is to give the programmer control over which versions of a class are considered incompatible in regard to serialization. As long as the serialVersionUID stays the same, the serialization mechanism will make a best effort to translate serialized instances, which may not be what you want. If you make a semantic change that renders older versions incompatible, you can change the serialVersionUID to make deserializing older instances fail. --> 
 
 -------------------------------------------------------------------------------------------------------------------
+double value = 4.2352989244d;
+assertThat(String.format("%.2f", value)).isEqualTo("4.24");
+assertThat(String.format("%.3f", value)).isEqualTo("4.235");
 
 StringUtils e String.format
 adicionando spaces espaco vazio
@@ -1282,3 +1285,15 @@ console.log(str2.concat(', ', str1));
 
 
 -------------------------------------------------------------------------------------------------------------------
+
+Currency
+
+public static String currencyWithChosenLocalisation(double value, Locale locale) {
+    NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
+    return nf.format(value);
+}
+
+double value = 23_500;
+assertThat(currencyWithChosenLocalisation(value, new Locale("en", "US"))).isEqualTo("$23,500.00");
+assertThat(currencyWithChosenLocalisation(value, new Locale("zh", "CN"))).isEqualTo("￥23,500.00");
+assertThat(currencyWithChosenLocalisation(value, new Locale("pl", "PL"))).isEqualTo("23 500 zł");
